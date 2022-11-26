@@ -1,5 +1,6 @@
 <template>
   <div>{{isMobileTerminal}}</div>
+  <router-view></router-view>
 </template>
 
 <script setup>
