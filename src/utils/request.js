@@ -12,4 +12,16 @@ service.interceptors.request.use((config) => {
 }, (err) => {
   return Promise.reject(err)
 })
+
+// 响应拦截器
+service.interceptors.response.use(res => {
+  const { success, message, data } = res.data
+  if (success) {
+    return data
+  } else {
+    return Promise.reject(new Error(message))
+  }
+}, (err) => {
+  return Promise.reject(err)
+})
 export default service
