@@ -26,9 +26,11 @@ const props = defineProps({
     default:()=>([])
   }
 })
+
+
 // slider 的样式:
 const sliderStyle = ref({
-  width: '60px',
+  width: '52px',
   transform: 'translateX(0px)'
 })
 // 当前分类的 index
@@ -60,6 +62,7 @@ watch(currentCategoryIndex, (newIndex) => {
     transform: `translateX(${ulScrollLeft.value + left - 10}px)`
   }
 })
+
 </script>
 <style lang="scss" scoped>
   
