@@ -3,5 +3,8 @@ import './style.css'
 import './styles/index.scss'
 import App from './App.vue'
 import router from './router/index'
+import { useREM } from './utils/flexible';
+
+useREM()
 
 createApp(App).use(router).mount('#app')
