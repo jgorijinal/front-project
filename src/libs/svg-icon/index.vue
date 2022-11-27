@@ -4,6 +4,7 @@
   </svg>
 </template>
 <script setup>
+import { computed } from 'vue'
 const props = defineProps({
   // 显示的 svg 图标名称 (不包含 #icon-)
   name: {

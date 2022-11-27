@@ -5,6 +5,8 @@ import App from './App.vue'
 import router from './router/index'
 import { useREM } from './utils/flexible';
 import mlibs from '@/libs'
+import 'virtual:svg-icons-register'
+
 useREM()
 
 createApp(App).use(router).use(mlibs).mount('#app')
