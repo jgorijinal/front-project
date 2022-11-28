@@ -38,7 +38,7 @@ const currentCategoryIndex = ref(0)
 // 切换 index
 const onItemClick = (index) => {
   currentCategoryIndex.value = index
-}
+} 
 // 所有 category 的 el 数组
 let itemRefs = []
 const setItemRef = (el) => {
