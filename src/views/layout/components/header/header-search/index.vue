@@ -1,6 +1,6 @@
 <template>
-  <div class="fixed right-2 bottom-10">
-    floating
+  <div class="">
+    search
   </div>
 </template>
 <script setup>
