@@ -39,5 +39,16 @@ watch(() => props.modelValue, (val) => {
 })
 </script>
 <style lang="scss" scoped>
-  
+  .fade-enter-active,.fade-leave-active {
+    transition: all 0.25s ease;
+  }
+  .fade-enter-from,.fade-leave-to {
+    opacity: 0;
+  }
+  .downToUp-enter-active,.downToUp-leave-active {
+    transition: all 0.25s ease;
+  }
+  .downToUp-enter-from,.downToUp-leave-to {
+    transform: translateY(100%);
+  }
 </style>
