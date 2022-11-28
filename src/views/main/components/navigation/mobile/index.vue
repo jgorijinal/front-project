@@ -19,13 +19,14 @@
     </ul>
     <!--弹出层 popup-->
     <m-popup v-model="isVisible">
-      <div>123456</div>
+      <menu-vue :categorys="data" @itemClick="itemClick"></menu-vue>
     </m-popup>
   </div>
 </template>
 <script setup>
 import { ref, watch,onBeforeUpdate } from 'vue'
 import { useScroll } from '@vueuse/core';
+import menuVue from '@/views/main/components/menu/index.vue'
 const props = defineProps({
   data: {
     type: Array,
@@ -72,6 +73,12 @@ watch(currentCategoryIndex, (newIndex) => {
 const isVisible = ref(false)
 const onClickHamburger = () => {
   isVisible.value = true
+}
+
+// 家庭弹出层里面的 menu 的 item 点击 
+const itemClick = (index) => {
+  currentCategoryIndex.value = index
+  isVisible.value = false
 }
 </script>
 <style lang="scss" scoped>
