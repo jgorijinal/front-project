@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fixed right-1 bottom-4">
     floating
   </div>
 </template>
