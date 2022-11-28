@@ -4,8 +4,9 @@
     :class="[
     typeEnum[type],
     sizeEnum[sizeKey].button,
-    { 'active:scale-105': isActiveAnim }]
-  ">
+    { 'active:scale-105': isActiveAnim }]"
+    @click.stop="onClickButton"
+  >
     <!--展示 loading 动画-->
     <m-svg-icon name="loading" v-if="loading" class="w-2 h-2 animate-spin mr-1"></m-svg-icon>
     <!--icon 按钮-->
@@ -108,6 +109,15 @@ const props = defineProps({
 const sizeKey = computed(() => {
   return props.icon ? 'icon-'+ props.size : props.size
 }) 
+
+const emits = defineEmits(['click'])
+// 点击按钮 
+const onClickButton = () => {
+  if (props.loading) {
+    return 
+  }  
+  emits('click',123456)
+}
 </script>
 <style lang="scss" scoped>
   

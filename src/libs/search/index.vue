@@ -34,6 +34,7 @@
         icon="search"
         iconColor="#ffffff"
         type="main"
+        @click="clickSearchBtn"
       ></m-button>
 
     </div>
@@ -48,6 +49,9 @@
   </div>
 </template>
 <script setup>
+const clickSearchBtn = (value) => {
+  console.log(value)
+}
 </script>
 <style lang="">
   
