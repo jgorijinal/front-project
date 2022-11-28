@@ -1,6 +1,6 @@
 <template>
-  <div class="">
-    search
+  <div class="w-full">
+    <m-search></m-search>
   </div>
 </template>
 <script setup>
