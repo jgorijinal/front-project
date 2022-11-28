@@ -24,14 +24,14 @@
 <script>
 // type 可选项: 按钮风格 primary main info
 const typeEnum = { // primary , main , info
-  primary: 'text-white  bg-zinc-800 hover:bg-zinc-900 active:bg-zinc-800 ',
+  primary: 'text-white  bg-zinc-800 hover:bg-zinc-900 active:bg-zinc-800 ', // 字体颜色,背景颜色, 点击时北京颜色
   main: 'text-white  bg-main hover:bg-hover-main active:bg-main ',
   info: 'text-zinc-800 bg-zinc-200 hover:bg-zinc-300 active:bg-zinc-200 '
 }
 // size 可选项: 按钮大小可选项 default small , 还要区分 文字按钮和图标按钮
 const sizeEnum = { // default small,  (icon-default , icon-small)
   default: { 
-    button: 'w-8 h-4 text-base',
+    button: 'w-8 h-4 text-base', // 按钮尺寸, 字体尺寸
     icon: ''
   },
   'icon-default': {

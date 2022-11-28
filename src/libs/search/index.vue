@@ -9,7 +9,7 @@
       ></m-svg-icon>
       <!--input输入框-->
       <!-- <input type="text" 
-        placeholder="搜索"
+        placeholder="搜索" 
         class="h-[44px] block w-full rounded-xl text-sm tracking-wide pl-4 outline-0"  
       > -->
       <input
@@ -29,6 +29,13 @@
       <!--分割线-->
       <div class="opacity-0 group-hover:opacity-[100%] absolute w-[2px] h-1.5 bg-zinc-500/80 right-[62px] top-[50%] translate-y-[-50%] "></div>
       <!--TODO: 搜索按钮(通用组件)-->
+      <m-button
+        class="absolute translate-y-[-50%] top-[50%] right-1 rounded-lg"
+        icon="search"
+        iconColor="#ffffff"
+        type="main"
+      ></m-button>
+
     </div>
     <!--下拉区-->
     <transition name="slide">
