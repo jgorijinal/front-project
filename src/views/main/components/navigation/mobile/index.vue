@@ -19,7 +19,7 @@
     </ul>
     <!--弹出层 popup-->
     <m-popup v-model="isVisible">
-      <menu-vue :categorys="data" @itemClick="itemClick"></menu-vue>
+      <menu-vue :categorys="data" @itemClick="itemClick" :currentCategoryIndex="currentCategoryIndex"></menu-vue>
     </m-popup>
   </div>
 </template>

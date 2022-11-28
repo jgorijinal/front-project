@@ -4,6 +4,7 @@
     <ul class="overflow-y-scroll">
       <li v-for="item,index in categorys" :key="index"
         class="px-1 py-1 text-lg active:bg-zinc-200 duration-200"
+        :class="{'bg-zinc-100':currentCategoryIndex === index}"
         @click="onItemClick(index)"
       >
         {{item.name}}
@@ -16,6 +17,10 @@ const props = defineProps({
   categorys: {
     type: Array,
     required: true
+  },
+  currentCategoryIndex: {
+    type: Number,
+    required:true
   }
 })
 const emits = defineEmits(['itemClick'])
