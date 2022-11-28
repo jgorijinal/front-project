@@ -17,12 +17,11 @@
   </div>
 </template>
 <script setup>
-import { useScrollLock } from '@vueuse/core'
 import { watch } from 'vue'
+import { useScrollLock } from '@vueuse/core'
 const props = defineProps({
   modelValue: {
     type: Boolean,
-    required:true
   }
 })
 const emits = defineEmits(['update:modelValue'])

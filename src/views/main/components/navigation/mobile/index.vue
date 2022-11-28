@@ -4,7 +4,9 @@
       <!--slider 滑块-->
       <li  ref="sliderRef" class="absolute h-[22px] bg-zinc-700 rounded-lg duration-200" :style="sliderStyle" ></li>
       <!--汉堡-->
-      <li class="fixed z-20 top-0 right-[-1px] h-[42.9px] pr-1 flex items-center bg-white shadow-l-white"  >
+      <li class="fixed z-20 top-0 right-[-1px] h-[42.9px] pr-1 flex items-center bg-white shadow-l-white"
+        @click="onClickHamburger"
+      >
         <m-svg-icon name="hamburger" class="w-1.5 h-1.5"/>
       </li>
       <!--分类 item-->
@@ -15,6 +17,10 @@
         {{item.name}}
       </li>
     </ul>
+    <!--弹出层 popup-->
+    <m-popup v-model="isVisible">
+      <div>123456</div>
+    </m-popup>
   </div>
 </template>
 <script setup>
@@ -62,7 +68,11 @@ watch(currentCategoryIndex, (newIndex) => {
     transform: `translateX(${ulScrollLeft.value + left - 10}px)`
   }
 })
-
+// popup 显示隐藏
+const isVisible = ref(false)
+const onClickHamburger = () => {
+  isVisible.value = true
+}
 </script>
 <style lang="scss" scoped>
   
