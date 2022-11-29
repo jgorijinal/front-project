@@ -16,6 +16,7 @@
         type="text"
         placeholder="搜索"
         :value="modelValue" @input="listenInput"
+        @focus="isInputFocus = true"
       />
       <!--删除按钮-->
       <m-svg-icon
@@ -34,6 +35,7 @@
         iconColor="#ffffff"
         type="main"
         @click="clickSearchBtn"
+        @keyup.enter="clickSearchBtn"
       ></m-button>
 
     </div>
@@ -41,6 +43,7 @@
     <transition name="slide">
       <div
         class="max-h-[368px] w-full text-base overflow-auto bg-white absolute z-20 left-0 top-[56px] p-2 rounded border border-zinc-200 duration-200 hover:shadow-3xl"
+        v-if="$slots.dropdown && isInputFocus"
       >
         <slot name="dropdown" />
       </div>
@@ -52,6 +55,7 @@ const EMITS_MODEL_VALUE = 'update:modelValue'
 const EMITS_SEARCH = 'search'
 </script>
 <script setup>
+import { ref } from 'vue'
 const props = defineProps({
   modelValue: {
     type: String,
@@ -67,12 +71,22 @@ const listenInput = ($event) => {
 const onClearClick = () => {
   emits(EMITS_MODEL_VALUE, '')
 }
-// 点击搜索按钮, 触发事件
+// 点击搜索按钮, 触发事件 search
 const clickSearchBtn = () => {
   console.log('点击')
   emits(EMITS_SEARCH, props.modelValue)
 }
+
+// input 是否获取焦点 : 判断显示/隐藏下拉区
+const isInputFocus = ref(false)
+
 </script>
-<style lang="">
-  
+<style lang="scss" scoped>
+.slide-enter-active, .slide-leave-active {
+  transition: all .25s ease
+}
+.slide-enter-from,.slide-leave-to  {
+  opacity: 0;
+  transform: translateY(-30px)
+}
 </style>
