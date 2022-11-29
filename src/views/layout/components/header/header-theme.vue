@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    theme
+    <m-svg-icon name=""></m-svg-icon>
   </div>
 </template>
 <script setup>
