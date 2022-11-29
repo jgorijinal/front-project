@@ -18,22 +18,23 @@
   </m-popover>
 </template>
 <script setup>
+import { THEME_LIGHT,THEME_DARK,THEME_SYSTEM } from  '@/constants'
 const themeArr = [
   {
     id: 0,
-    type: 'theme-light',
+    type: THEME_LIGHT,
     name: '极简白',
     icon: 'theme-light',
   },
   {
     id: 1,
-    type: 'theme-dark',
+    type: THEME_DARK,
     name: '极夜黑',
     icon: 'theme-dark',
   },
   {
     id: 2,
-    type: 'theme-system',
+    type: THEME_SYSTEM,
     name: '跟随系统',
     icon: 'theme-system',
   },
