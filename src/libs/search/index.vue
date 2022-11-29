@@ -17,6 +17,7 @@
         placeholder="搜索"
         :value="modelValue" @input="listenInput"
         @focus="onFocusInput"
+        @blur="onBlueHandler"
       />
       <!--删除按钮-->
       <m-svg-icon
@@ -101,8 +102,11 @@ const containerRef = ref(null)
 // 点击 search 组件外部区域, 隐藏下拉区
 onClickOutside(containerRef, () => {
   isInputFocus.value = false
-  emits(EMITS_BLUR)
 })
+
+const onBlueHandler = () =>{
+  emits(EMITS_BLUR)
+}
 </script>
 <style lang="scss" scoped>
 .slide-enter-active, .slide-leave-active {
