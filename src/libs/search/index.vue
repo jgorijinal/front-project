@@ -8,10 +8,6 @@
         color="#707070"
       ></m-svg-icon>
       <!--input输入框-->
-      <!-- <input type="text" 
-        placeholder="搜索" 
-        class="h-[44px] block w-full rounded-xl text-sm tracking-wide pl-4 outline-0"  
-      > -->
       <input
         class="block w-full h-[44px] pl-4 text-sm outline-0
           bg-zinc-100 caret-zinc-400 rounded-xl text-zinc-900 tracking-wide
@@ -19,6 +15,7 @@
           group-hover:border-zinc-200 focus:border-red-300"
         type="text"
         placeholder="搜索"
+        :value="modelValue" @input="listenInput"
       />
       <!--删除按钮-->
       <m-svg-icon
@@ -48,9 +45,23 @@
     </transition>
   </div>
 </template>
+<script>
+const EMITS_MODEL_VALUE = 'update:modelValue'
+</script>
 <script setup>
-const clickSearchBtn = (value) => {
-  console.log(value)
+const props = defineProps({
+  modelValue: {
+    type: String,
+    required: true
+  }
+})
+const emits = defineEmits([EMITS_MODEL_VALUE])
+const listenInput = ($event) => {
+  emits(EMITS_MODEL_VALUE, $event.target.value)
+}
+// 点击 搜索按钮
+const clickSearchBtn = () => {
+  console.log('点击')
 }
 </script>
 <style lang="">

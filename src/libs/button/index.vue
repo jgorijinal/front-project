@@ -116,7 +116,7 @@ const onClickButton = () => {
   if (props.loading) {
     return 
   }  
-  emits('click',123456)
+  emits('click')
 }
 </script>
 <style lang="scss" scoped>
