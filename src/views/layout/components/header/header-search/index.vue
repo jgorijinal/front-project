@@ -1,7 +1,6 @@
 <template>
   <div class="w-full">
     <m-search v-model="inputValue"></m-search>
-    {{inputValue}}
   </div>
 </template>
 <script setup>

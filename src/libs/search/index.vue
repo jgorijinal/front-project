@@ -19,15 +19,17 @@
       />
       <!--删除按钮-->
       <m-svg-icon
+        v-show="modelValue"
         name="input-delete"
         class="h-1.5 w-1.5 absolute translate-y-[-50%] top-[50%] right-9 duration-500 cursor-pointer"
         color="#707070"
+        @click="onClearClick"
       ></m-svg-icon>
       <!--分割线-->
       <div class="opacity-0 group-hover:opacity-[100%] absolute w-[2px] h-1.5 bg-zinc-500/80 right-[62px] top-[50%] translate-y-[-50%] "></div>
       <!--TODO: 搜索按钮(通用组件)-->
       <m-button
-        class="absolute translate-y-[-50%] top-[50%] right-1 rounded-lg"
+        class="absolute translate-y-[-50%] top-[50%] right-1 rounded-lg opacity-0 group-hover:opacity-100"
         icon="search"
         iconColor="#ffffff"
         type="main"
@@ -58,6 +60,11 @@ const props = defineProps({
 const emits = defineEmits([EMITS_MODEL_VALUE])
 const listenInput = ($event) => {
   emits(EMITS_MODEL_VALUE, $event.target.value)
+}
+
+// 一键清空文本
+const onClearClick = () => {
+  emits(EMITS_MODEL_VALUE, '')
 }
 // 点击 搜索按钮
 const clickSearchBtn = () => {
