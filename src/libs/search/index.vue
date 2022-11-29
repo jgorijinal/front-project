@@ -16,7 +16,7 @@
         type="text"
         placeholder="搜索"
         :value="modelValue" @input="listenInput"
-        @focus="isInputFocus = true"
+        @focus="onFocusInput"
       />
       <!--删除按钮-->
       <m-svg-icon
@@ -51,8 +51,18 @@
   </div>
 </template>
 <script>
+// modelValue 改变
 const EMITS_MODEL_VALUE = 'update:modelValue'
+// 搜索
 const EMITS_SEARCH = 'search'
+// focus
+const EMITS_FOCUS = 'focus'
+// input
+const EMITS_INPUT = 'input'
+// blur
+const EMITS_BLUR = 'blur'
+// 清空文本
+const EMITS_CLEAR = 'clear'
 </script>
 <script setup>
 import { ref } from 'vue'
@@ -63,14 +73,16 @@ const props = defineProps({
     required: true
   }
 })
-const emits = defineEmits([EMITS_MODEL_VALUE,EMITS_SEARCH])
+const emits = defineEmits([EMITS_MODEL_VALUE,EMITS_SEARCH,EMITS_FOCUS,EMITS_INPUT,EMITS_BLUR,EMITS_CLEAR])
 const listenInput = ($event) => {
   emits(EMITS_MODEL_VALUE, $event.target.value)
+  emits(EMITS_INPUT)
 }
 
 // 一键清空文本
 const onClearClick = () => {
   emits(EMITS_MODEL_VALUE, '')
+  emits(EMITS_CLEAR)
 }
 // 点击搜索按钮, 触发事件 search
 const clickSearchBtn = () => {
@@ -80,11 +92,16 @@ const clickSearchBtn = () => {
 
 // input 是否获取焦点 : 判断显示/隐藏下拉区
 const isInputFocus = ref(false)
+// input 获取焦点
+const onFocusInput = () => {
+  isInputFocus.value = true
+  emits(EMITS_FOCUS)
+}
 const containerRef = ref(null)
 // 点击 search 组件外部区域, 隐藏下拉区
 onClickOutside(containerRef, () => {
   isInputFocus.value = false
-
+  emits(EMITS_BLUR)
 })
 </script>
 <style lang="scss" scoped>
