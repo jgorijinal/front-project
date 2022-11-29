@@ -1,5 +1,5 @@
 <template>
-  <div class="group relative bg-white p-0.5 rounded-xl hover:bg-red-100 duration-200">
+  <div ref="containerRef" class="group relative bg-white p-0.5 rounded-xl hover:bg-red-100 duration-200">
     <div>
       <!--图标-->
       <m-svg-icon
@@ -56,6 +56,7 @@ const EMITS_SEARCH = 'search'
 </script>
 <script setup>
 import { ref } from 'vue'
+import { onClickOutside } from '@vueuse/core'; 
 const props = defineProps({
   modelValue: {
     type: String,
@@ -79,7 +80,12 @@ const clickSearchBtn = () => {
 
 // input 是否获取焦点 : 判断显示/隐藏下拉区
 const isInputFocus = ref(false)
+const containerRef = ref(null)
+// 点击 search 组件外部区域, 隐藏下拉区
+onClickOutside(containerRef, () => {
+  isInputFocus.value = false
 
+})
 </script>
 <style lang="scss" scoped>
 .slide-enter-active, .slide-leave-active {
@@ -87,6 +93,6 @@ const isInputFocus = ref(false)
 }
 .slide-enter-from,.slide-leave-to  {
   opacity: 0;
-  transform: translateY(-30px)
+  transform: translateY(-20px)
 }
 </style>
