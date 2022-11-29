@@ -49,6 +49,7 @@
 </template>
 <script>
 const EMITS_MODEL_VALUE = 'update:modelValue'
+const EMITS_SEARCH = 'search'
 </script>
 <script setup>
 const props = defineProps({
@@ -57,7 +58,7 @@ const props = defineProps({
     required: true
   }
 })
-const emits = defineEmits([EMITS_MODEL_VALUE])
+const emits = defineEmits([EMITS_MODEL_VALUE,EMITS_SEARCH])
 const listenInput = ($event) => {
   emits(EMITS_MODEL_VALUE, $event.target.value)
 }
@@ -66,9 +67,10 @@ const listenInput = ($event) => {
 const onClearClick = () => {
   emits(EMITS_MODEL_VALUE, '')
 }
-// 点击 搜索按钮
+// 点击搜索按钮, 触发事件
 const clickSearchBtn = () => {
   console.log('点击')
+  emits(EMITS_SEARCH, props.modelValue)
 }
 </script>
 <style lang="">
