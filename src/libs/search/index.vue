@@ -1,18 +1,22 @@
 <template>
-  <div ref="containerRef" class="group relative bg-white p-0.5 rounded-xl hover:bg-red-100 duration-200">
+  <div ref="containerRef" class="group relative bg-white dark:bg-zinc-700 dark:hover:bg-pink-300/50 p-0.5 rounded-xl
+    hover:bg-red-100 duration-300">
     <div>
       <!--图标-->
       <m-svg-icon
         name="search"
         class="w-1.5 h-1.5 absolute top-[50%] left-2 translate-y-[-50%]"
         color="#707070"
+        fillClass="dark:fill-zinc-200"
       ></m-svg-icon>
       <!--input输入框-->
       <input
         class="block w-full h-[44px] pl-4 text-sm outline-0
-          bg-zinc-100 caret-zinc-400 rounded-xl text-zinc-900 tracking-wide
-          font-semibold border border-zinc-100 duration-500 group-hover:bg-white 
-          group-hover:border-zinc-200 focus:border-red-300"
+          bg-zinc-100 dark:bg-zinc-800 dark:hover:bg-zinc-900 caret-zinc-400 rounded-xl text-zinc-900 
+          tracking-wide dark:text-zinc-400
+          font-semibold border border-zinc-100 dark:border-zinc-800 dark:hover:border-zinc-800 duration-500
+          group-hover:bg-white dark:group-hover:bg-zinc-800
+          group-hover:border-zinc-200 dark:group-hover:border-zinc-800 focus:border-red-300"
         type="text"
         placeholder="搜索"
         :value="modelValue" @input="listenInput"
@@ -31,7 +35,7 @@
       <div class="opacity-0 group-hover:opacity-[100%] absolute w-[2px] h-1.5 bg-zinc-500/80 right-[62px] top-[50%] translate-y-[-50%] "></div>
       <!--TODO: 搜索按钮(通用组件)-->
       <m-button
-        class="absolute translate-y-[-50%] top-[50%] right-1 rounded-lg opacity-0 group-hover:opacity-100"
+        class="absolute dark:bg-zinc-700 translate-y-[-50%] top-[50%] right-1 rounded-lg opacity-0 group-hover:opacity-100"
         icon="search"
         iconColor="#ffffff"
         type="main"
