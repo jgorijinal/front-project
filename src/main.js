@@ -6,7 +6,8 @@ import router from './router/index'
 import { useREM } from './utils/flexible';
 import mlibs from '@/libs'
 import 'virtual:svg-icons-register'
+import store from './store/index'
 
 useREM()
 
-createApp(App).use(router).use(mlibs).mount('#app')
+createApp(App).use(router).use(store).use(mlibs).mount('#app')

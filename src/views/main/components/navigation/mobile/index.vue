@@ -10,7 +10,7 @@
         <m-svg-icon name="hamburger" class="w-1.5 h-1.5"/>
       </li>
       <!--分类 item-->
-      <li @click="onItemClick(index)" :ref="setItemRef" v-for="item,index in data" :key="item.id" 
+      <li @click="onItemClick(index)" :ref="setItemRef" v-for="item,index in $store.getters.categorys" :key="item.id" 
         class="shrink-0 px-1.5 py-0.5 duration-200 last:mr-4 z-10"
         :class="{'text-zinc-200': currentCategoryIndex === index}"
         >
@@ -19,7 +19,7 @@
     </ul>
     <!--弹出层 popup-->
     <m-popup v-model="isVisible">
-      <menu-vue :categorys="data" @itemClick="itemClick" :currentCategoryIndex="currentCategoryIndex"></menu-vue>
+      <menu-vue  @itemClick="itemClick" :currentCategoryIndex="currentCategoryIndex"></menu-vue>
     </m-popup>
   </div>
 </template>
@@ -27,12 +27,12 @@
 import { ref, watch,onBeforeUpdate } from 'vue'
 import { useScroll } from '@vueuse/core';
 import menuVue from '@/views/main/components/menu/index.vue'
-const props = defineProps({
-  data: {
-    type: Array,
-    default:()=>([])
-  }
-})
+// const props = defineProps({
+//   data: {
+//     type: Array,
+//     default:()=>([])
+//   }
+// })
 
 
 // slider 的样式:
