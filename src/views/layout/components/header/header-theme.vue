@@ -3,7 +3,7 @@
     <!--#reference-->
     <template #reference>
       <div class="p-1 cursor-pointer bg-white rounded-md hover:bg-zinc-100 dark:bg-zinc-700 dark:hover:bg-zinc-800">
-        <m-svg-icon class="w-2 h-2" name="theme-light" fillClass="dark:fill-zinc-200"></m-svg-icon>
+        <m-svg-icon class="w-2 h-2" :name="currentThemeSvgName" fillClass="dark:fill-zinc-200"></m-svg-icon>
       </div>
     </template>
     <!--气泡框内容: 默认插槽-->
@@ -21,6 +21,7 @@
 <script setup>
 import { THEME_LIGHT,THEME_DARK,THEME_SYSTEM } from  '@/constants'
 import { useStore } from 'vuex'
+import { computed} from 'vue'
 const themeArr = [
   {
     id: 0,
@@ -46,5 +47,8 @@ const store = useStore()
 const onClickTheme = (type) => {
   store.commit('theme/setThemeType', type)
 }
+const currentThemeSvgName = computed(() => {
+  return themeArr.find(item => item.type === store.getters.themeType).icon
+})
 </script>
 <style lang="scss" scoped></style>
