@@ -1,11 +1,13 @@
 <template>
   <div class="bg-white sticky top-0 left-0 w-full z-10">
     <ul
-      class="w-[800px] relative flex flex-wrap justify-center overflow-x-auto px-[10px] py-1 text-xs text-zinc-600 duration-300 overflow-hidden mx-auto"
+      class="w-[800px] relative flex flex-wrap justify-center overflow-x-auto px-[10px] py-1 text-xs text-zinc-600 duration-200 overflow-hidden mx-auto"
+      :class="{'h-[56px]':!isOpened,'h-[206px]':isOpened}"
     >
       <!-- lg 下展开箭头 -->
       <div
         class="absolute right-1 bottom-1 z-20 p-1 rounded cursor-pointer duration-200 hover:bg-zinc-200"
+        @click="openHandler"
       >
         <m-svg-icon
           name="unfold"
@@ -26,7 +28,13 @@
 </template>
 
 <script setup>
-
+import { ref } from 'vue' 
+// 控制 展开/收缩
+const isOpened = ref(false)
+// 点击控制展开/伸缩
+const openHandler = () => {
+  isOpened.value = !isOpened.value
+}
 </script>
 <style lang="scss" scoped>
   
