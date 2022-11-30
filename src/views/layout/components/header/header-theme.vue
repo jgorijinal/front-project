@@ -9,7 +9,8 @@
     <!--气泡框内容: 默认插槽-->
     <ul class="w-[140px] ">
       <template v-for="item in themeArr" :key="item.id">
-        <li class="flex items-center p-1 hover:bg-zinc-100 rounded-md cursor-pointer duration-200 dark:bg-zinc-800 dark:hover:bg-zinc-700" >
+        <li @click="onClickTheme(item.type)" 
+          class="flex items-center p-1 hover:bg-zinc-100 rounded-md cursor-pointer duration-200 dark:bg-zinc-800 dark:hover:bg-zinc-700" >
           <m-svg-icon class="w-1.5 h-1.5 mr-1" :name="item.icon" fillClass="dark:fill-zinc-100"/>
           <span class="text-sm dark:text-zinc-200">{{item.name}}</span>
         </li>
@@ -19,6 +20,7 @@
 </template>
 <script setup>
 import { THEME_LIGHT,THEME_DARK,THEME_SYSTEM } from  '@/constants'
+import { useStore } from 'vuex'
 const themeArr = [
   {
     id: 0,
@@ -39,5 +41,10 @@ const themeArr = [
     icon: 'theme-system',
   },
 ]
+const store = useStore()
+// 点击切换主题
+const onClickTheme = (type) => {
+  store.commit('theme/setThemeType', type)
+}
 </script>
 <style lang="scss" scoped></style>

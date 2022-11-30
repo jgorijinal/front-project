@@ -10,7 +10,7 @@ export const THEME_LIGHT = 'light'
 // 深色主题
 export const THEME_DARK = 'dark'
 // 跟随系统
-export const THEME_SYSTEM = 'light'
+export const THEME_SYSTEM = 'system'
 
 // 初始 category 数据
 export const CATEGORY_NOMAR_DATA = [
