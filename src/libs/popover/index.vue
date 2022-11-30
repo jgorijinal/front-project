@@ -62,7 +62,6 @@ const contentRef = ref(null)
 // 获取元素的宽高
 const useElementSize = (el) => {
   if (!el) return 
-  console.log(el)
   return {
     width: el.getBoundingClientRect().width,
     height:el.offsetHeight
@@ -78,8 +77,6 @@ const popoverStyle = ref({
 watch(isVisible, (newValue) =>{
   if (!newValue) return 
   nextTick(() => {
-    console.log(useElementSize(contentRef.value).width)
-    console.log(useElementSize(referenceRef.value).width)
     if (props.placement === 'top-left') {
       popoverStyle.value = {
         top: '0px',
