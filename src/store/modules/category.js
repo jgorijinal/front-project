@@ -4,7 +4,7 @@ export default {
   namespaced: true,
   state() {
     return {
-      categorys: CATEGORY_NOMAR_DATA
+      categorys: CATEGORY_NOMAR_DATA // 初始数据
     }
   },
   mutations: {
