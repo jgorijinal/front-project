@@ -17,8 +17,10 @@
       </div>
       <!-- category item -->
       <li
-        v-for="item in $store.getters.categorys"
+        v-for="item,index in $store.getters.categorys"
         :key="item.id"
+        @click="onClickItem(index)"
+        :class="{'bg-zinc-200':currentCategoryIndex === index}"
         class="shrink-0 px-1.5 py-0 z-10 duration-200 last:mr-4 text-zinc-900 text-base font-bold h-4 leading-4 cursor-pointer hover:bg-zinc-200 rounded mr-1 mb-1"
       >
         {{ item.name }}
@@ -34,6 +36,13 @@ const isOpened = ref(false)
 // 点击控制展开/伸缩
 const openHandler = () => {
   isOpened.value = !isOpened.value
+}
+
+// 选中
+const currentCategoryIndex = ref(0)
+// 点击某一个分类
+const onClickItem = (index) => {
+  currentCategoryIndex.value = index
 }
 </script>
 <style lang="scss" scoped>
