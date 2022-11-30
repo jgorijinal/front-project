@@ -8,7 +8,7 @@ export const ALL_CATEGORY_ITEM = {
 // 浅色主题
 export const THEME_LIGHT = 'light'
 // 深色主题
-export const THEME_DARK = 'light'
+export const THEME_DARK = 'dark'
 // 跟随系统
 export const THEME_SYSTEM = 'light'
 
