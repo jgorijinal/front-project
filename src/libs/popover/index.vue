@@ -39,13 +39,20 @@ const props = defineProps({
 })
 // 气泡框的显示/隐藏
 const isVisible = ref(false)
+let timer = null 
 // 鼠标进入事件
 const onMouseenter = () => {
   isVisible.value = true
+  if (timer) {
+    clearTimeout(timer)
+  }
 }
 // 鼠标离开事件
 const onMouseleave = () => { 
-  isVisible.value = false
+  timer = setTimeout(() => {
+    isVisible.value = false
+    timer = null
+  }, 100)
 }
 
 // reference 的 dom
