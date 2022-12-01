@@ -1,8 +1,11 @@
 <template>
   <div>
-    <template v-for="item in pexelsData" :key="item.id">
-      <item-vue :item="item"></item-vue>
-    </template>
+    <m-waterfull :data="pexelsData" :column="5" nodeKey="id">
+      <template v-slot="{item, width}">
+        <item-vue :item="item"></item-vue>
+      </template>
+    </m-waterfull>
+    
   </div>
 </template>
 <script setup>

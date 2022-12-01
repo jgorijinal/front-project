@@ -5,7 +5,7 @@
       <img :src="item.photo" class="rounded" alt="">
       <!--遮罩层-->
       <div class="hidden xl:block opacity-0 hover:opacity-90 duration-300 hover:bg-zinc-800/70
-        absolute z-10 left-0 top-0 w-full h-full rounded">
+        absolute z-10 left-0 top-0 w-full h-full rounded hover:cursor-zoom-in">
         <!--一些按钮-->
         <m-button class="absolute top-1.5 left-1.5" type="main">分享</m-button>
         <m-button
