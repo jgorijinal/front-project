@@ -6,7 +6,7 @@
     </div>
     <!--需要展示的气泡框 transition 过度动画 -->
     <transition name="slide">
-      <div ref="contentRef" v-if="isVisible" class="dark:bg-zinc-800 dark:border-zinc-800 absolute z-20 bg-white p-1 border rounded-md" :style="popoverStyle">
+      <div ref="contentRef" v-if="isVisible" class="dark:bg-zinc-800 dark:border-zinc-800 absolute z-50 bg-white p-1 border rounded-md" :style="popoverStyle">
         <!--默认插槽-->
         <slot></slot>
       </div>
