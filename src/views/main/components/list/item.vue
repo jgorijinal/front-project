@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white dark:bg-zinc-900 xl:dark:bg-zinc-800 h-[400px] rounded  pb-1 w-[230px]">
+  <div class="bg-white dark:bg-zinc-900 xl:dark:bg-zinc-800  rounded  pb-1">
     <div class="relative rounded-md">
       <!--图片-->
       <img :src="item.photo" class="rounded" alt="">

@@ -26,7 +26,8 @@
   </div>
 </template>
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch, nextTick } from 'vue'
+import { getImgElements, getAllImgs, onCompleteImgs } from './utils'
 const props = defineProps({
   // 数据源
   data: {
@@ -99,8 +100,79 @@ const useColumnWidth = () => {
 
 onMounted(() => {
   useColumnWidth()
-  console.log(columnWidth.value)
 })
+
+// 需要图片预加载时
+// item 高度集合
+let itemHeights = []
+/**
+ * 监听图片加载完成
+ */
+const waitImgComplete = () => {
+  itemHeights = []
+  // 拿到所有 item 元素
+  const itemElements = [...document.getElementsByClassName("m-waterfall-item")]
+
+  // 获取所有 img 标签
+  const imgElements = getImgElements(itemElements)
+
+  // 拿到所有 img 标签的 src 路径 
+  const allImgs = getAllImgs(imgElements)
+  // 监听所有图片全部加载完(内部已经使用了 promise 封装)
+  onCompleteImgs(allImgs).then(res => {
+    // 这里图片已经加载完成
+    itemElements.forEach((el) => {
+      itemHeights.push(el.offsetHeight)
+    })
+    // 渲染位置
+    useItemLocation()
+})
+}
+// setTimeout(() => {
+//   waitImgComplete()
+// }, 1000)
+
+/**
+ * 图片不需要预加载时，计算 item 高度
+ */
+const useItemHeight = () => {
+  itemHeights = []
+  // 拿到所有元素
+  let itemElements = [...document.getElementsByClassName('m-waterfall-item')]
+
+  // 计算 item 高度
+  itemElements.forEach((el) => {
+    // 依据传入数据计算出的 img 高度
+    itemHeights.push(el.offsetHeight)
+  })
+  // 渲染位置
+  useItemLocation()
+}
+
+/**
+ * 为每个 item 生成位置属性
+ */
+const useItemLocation = () => {
+	console.log(itemHeights)
+}
+
+// 触发计算
+watch(() => props.data, (newVal) => {
+  if (newVal) {
+    nextTick(() => {
+    if (props.picturePreReading) {
+      waitImgComplete() 
+    } else {
+      useItemHeight()
+    }
+  })
+  }
+}, {
+  immediate: true,
+  deep:true
+})
+
+
 
 </script>
 <style lang="scss" scoped>
