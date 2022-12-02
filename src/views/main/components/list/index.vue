@@ -5,7 +5,6 @@
         <item-vue :item="item"></item-vue>
       </template>
     </m-waterfull>
-    
   </div>
 </template>
 <script setup>
