@@ -1,8 +1,8 @@
 <template>
   <div id="containerId">
-    <m-waterfull :data="pexelsData" :column="5" nodeKey="id">
+    <m-waterfull :data="pexelsData" :column="isMobileTerminal ? 2 : 5" nodeKey="id" class="w-full px-1" :picturePreReading="false">
       <template v-slot="{item, width}">
-        <item-vue :item="item"></item-vue>
+        <item-vue :item="item" :width="width"></item-vue>
       </template>
       </m-waterfull>
     </div>
@@ -10,6 +10,7 @@
 <script setup>
 import itemVue from './item.vue';
 import { getPexelsList } from '@/api/pexels'
+import { isMobileTerminal } from '@/utils/flexible';
 import { ref } from 'vue'
 
 

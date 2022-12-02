@@ -2,7 +2,11 @@
   <div class="bg-white dark:bg-zinc-900 xl:dark:bg-zinc-800  rounded  pb-1">
     <div class="relative rounded-md">
       <!--图片-->
-      <img :src="item.photo" class="rounded" alt="">
+      <img :src="item.photo" class="rounded" 
+      :style="{
+            height: (width / item.photoWidth) * item.photoHeight + 'px'
+        }"
+      alt="" >
       <!--遮罩层-->
       <div class="hidden xl:block opacity-0 hover:opacity-90 duration-300 hover:bg-zinc-800/70
         absolute z-10 left-0 top-0 w-full h-full rounded hover:cursor-zoom-in">
@@ -42,7 +46,10 @@ const props = defineProps({
   item: {
     type: Object,
     default: () => ({})
-  }    
+  },
+  width: {
+    type: Number,
+  }
 })
 </script>
 <style lang="scss" scoped>

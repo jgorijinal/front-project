@@ -22,12 +22,12 @@
       </div>
     </template>
     <!-- 可以给一个加载中的描述，没有也无所谓 -->
-    <div v-else>加载中...</div>
+    <div v-else class="fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-lg">加载中....</div>
   </div>
 </template>
 <script setup>
-import { ref, computed, onMounted, watch, nextTick } from 'vue'
-import { getImgElements, getAllImgs, onCompleteImgs } from './utils'
+import { ref, computed, onMounted, watch, nextTick, onUnmounted } from 'vue'
+import { getImgElements, getAllImgs, onCompleteImgs,getMinHeightColumn,getMinHeight,getMaxHeight } from './utils'
 const props = defineProps({
   // 数据源
   data: {
@@ -153,28 +153,117 @@ const useItemHeight = () => {
  * 为每个 item 生成位置属性
  */
 const useItemLocation = () => {
-	console.log(itemHeights)
+	  // 遍历数据源
+    props.data.forEach((item, index) => {
+    // 避免重复计算
+    if (item._style) {
+      return
+    }
+    // 生成 _style 属性
+    item._style = {}
+    // left
+    item._style.left = getItemLeft()
+    // top
+    item._style.top = getItemTop()
+    // 指定列高度自增
+    increasingHeight(index)
+  })
+
+  // 指定容器高度
+  containerHeight.value = getMaxHeight(columnHeightObj.value)
 }
 
 // 触发计算
 watch(() => props.data, (newVal) => {
-  if (newVal) {
-    nextTick(() => {
+  // 重置数据源
+  const resetColumnHeight = newVal.every((item) => !item._style)
+    if (resetColumnHeight) {
+      // 构建高度记录容器
+      useColumnHeightObj()
+    }
+  nextTick(() => {
     if (props.picturePreReading) {
       waitImgComplete() 
     } else {
       useItemHeight()
     }
   })
-  }
 }, {
   immediate: true,
   deep:true
 })
 
+/**
+ * 返回下一个 item 的 left
+ */
+const getItemLeft = () => {
+  // 最小高度所在的列 * (列宽 + 间距)
+  const column = getMinHeightColumn(columnHeightObj.value)
+  return (
+    column * (columnWidth.value + props.columnSpacing) + containerLeft.value
+  )
+}
+
+/**
+ * 返回下一个 item 的 top
+ */
+ const getItemTop = () => {
+  // 列高对象中的最小的高度
+  return getMinHeight(columnHeightObj.value)
+}
+/**
+ * 指定列高度自增
+ */
+ const increasingHeight = (index) => {
+	// 最小高度所在的列  
+  const minHeightColumn = getMinHeightColumn(columnHeightObj.value)
+  // 该列高度自增
+  columnHeightObj.value[minHeightColumn] +=
+    itemHeights[index] + props.rowSpacing
+}
+/**
+ * 在组件销毁时，清除所有的 _style
+ */
+ onUnmounted(() => {
+  props.data.forEach((item) => {
+    delete item._style
+  })
+})
+
+/**
+ * 监听列数变化，重新构建瀑布流
+ */
+const reset = () => {
+  // 延迟 100 毫秒，否则会导致宽度计算不正确
+  setTimeout(() => {
+    // 重新计算列宽
+    useColumnWidth()
+    // 重置所有的定位数据，因为 data 中进行了深度监听，所以该操作会触发 data 的 watch
+    props.data.forEach((item) => {
+      item._style = null
+    })
+  }, 100)
+}
+
+/**
+ * 监听列数变化
+ */
+watch(
+  () => props.column,
+  () => {
+    // // 在 picturePreReading 为 true 的前提下，需要首先为列宽滞空，列宽滞空之后，会取消瀑布流渲染
+    // columnWidth.value = 0
+    // reset()
+    if (props.picturePreReading) {
+      // 在 picturePreReading 为 true 的前提下，需要首先为列宽滞空，列宽滞空之后，会取消瀑布流渲染
+      columnWidth.value = 0
+      // 等待页面渲染之后，重新执行计算。否则在 item 没有指定过高度的前提下，计算出的 item 高度会不正确
+      nextTick(reset)
+    } else {
+      reset()
+    }
+  }
+)
 
 
 </script>
-<style lang="scss" scoped>
-  
-</style>
