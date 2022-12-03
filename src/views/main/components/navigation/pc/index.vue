@@ -19,8 +19,8 @@
       <li
         v-for="item,index in $store.getters.categorys"
         :key="item.id"
-        @click="onClickItem(index)"
-        :class="{'bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-100':currentCategoryIndex === index}"
+        @click="onClickItem(item)"
+        :class="{'bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-100':$store.getters.currentCategoryIndex === index}"
         class="shrink-0 px-1.5 py-0 z-10 duration-200 last:mr-4 text-zinc-900  dark:text-zinc-500 text-base 
         font-bold h-4 leading-4 cursor-pointer hover:bg-zinc-200 dark:hover:bg-zinc-900 dark:hover:text-zinc-200 rounded mr-1 mb-1"
       >
@@ -32,6 +32,7 @@
 
 <script setup>
 import { ref } from 'vue' 
+import { useStore } from  'vuex'
 // 控制 展开/收缩
 const isOpened = ref(false)
 // 点击控制展开/伸缩
@@ -40,10 +41,14 @@ const openHandler = () => {
 }
 
 // 选中
-const currentCategoryIndex = ref(0)
+// const currentCategoryIndex = ref(0)
+
+const store = useStore()
 // 点击某一个分类
-const onClickItem = (index) => {
-  currentCategoryIndex.value = index
+const onClickItem = (item) => {
+  // currentCategoryIndex.value = index
+  // 使用了 vuex 来管理
+  store.commit('app/setCurrentCategory' , item)
 }
 </script>
 <style lang="scss" scoped>
