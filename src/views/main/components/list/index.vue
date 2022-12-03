@@ -13,13 +13,25 @@
 import itemVue from './item.vue';
 import { getPexelsList } from '@/api/pexels'
 import { isMobileTerminal } from '@/utils/flexible';
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useStore } from 'vuex' 
+
+const store = useStore()
 // 图片列表
 const pexelsData = ref([])
+
+// 请求参数
+const query = ref({
+  page: 1,
+  size: 20,
+  categoryId: 'all'
+})
+
 // 当前页码
-const page = ref(1)
+// const page = ref(1)
 // 一页数量
-const size = ref(20)
+// const size = ref(20)
+
 // 总数据数
 const total = ref(0)
 
@@ -35,10 +47,7 @@ const getPexelsData = async () => {
 
   isLoading.value = true
 
-  const res = await getPexelsList({
-    page: page.value,
-    size:size.value
-  })
+  const res = await getPexelsList(query.value)
   console.log(res.list)
   // 注意 : 要追加数据!
   pexelsData.value = [...pexelsData.value, ...res.list]
@@ -47,7 +56,7 @@ const getPexelsData = async () => {
   isLoading.value = false
   // 让 page 页码自增
   if (res.list.length) {
-    page.value++
+    query.value.page++
   }
   // 如果数据全部加载完, isFinished 设为 true
   if (total.value === pexelsData.value.length) {
@@ -55,6 +64,27 @@ const getPexelsData = async () => {
   }
 }
 getPexelsData()
+
+/**
+ * 重置请求参数
+*/
+const resetQuery = (newQueryObj) => {
+  pexelsData.value = []
+  total.value = 0
+  isLoading.value = false
+  isFinished.value = false
+
+  query.value = {...query.value, ...newQueryObj}
+}
+
+watch(() => store.getters.currentCategory, (currentCategory) => {
+  // 重置参数
+  resetQuery({
+    page: 1,
+    categoryId:currentCategory.id
+  })
+  getPexelsData()
+})
 </script>
 <style lang="scss" scoped>
   

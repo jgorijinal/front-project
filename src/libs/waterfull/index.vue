@@ -22,7 +22,7 @@
       </div>
     </template>
     <!-- 可以给一个加载中的描述，没有也无所谓 -->
-    <div v-else class="fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-lg">加载中....</div>
+    <!-- <div v-else class="fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-lg">加载中....</div> -->
   </div>
 </template>
 <script setup>
