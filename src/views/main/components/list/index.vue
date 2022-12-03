@@ -4,8 +4,9 @@
       <template v-slot="{item, width}">
         <item-vue :item="item" :width="width"></item-vue>
       </template>
-      </m-waterfull>
-    </div>
+    </m-waterfull>
+    <m-infinite-list v-model="isLoading" :isFinished="isFinished" @onLoad="onLoad"></m-infinite-list>
+  </div>
 </template>
 <script setup>
 import itemVue from './item.vue';
@@ -32,6 +33,13 @@ const getPexelsData = async () => {
   total.value = res.total
 }
 getPexelsData()
+
+// infinite-list 长列表组件相关逻辑
+const isLoading = ref(false)
+const isFinished = ref(true)
+const onLoad = () => {
+  console.log('列表加载完成, 请求下一页数据')
+}
 </script>
 <style lang="scss" scoped>
   
