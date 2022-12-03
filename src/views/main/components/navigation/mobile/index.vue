@@ -1,5 +1,5 @@
 <template>
-  <div class="sticky left-0 top-0 right-0 z-40 bg-white" >
+  <div class="sticky left-0 top-0 right-0 z-20 bg-white" >
     <ul ref="ulRef" class="relative flex overflow-x-auto overflow-hidden p-1 text-xs text-zinc-600">
       <!--slider 滑块-->
       <li  ref="sliderRef" class="absolute h-[22px] bg-zinc-700 rounded-lg duration-200" :style="sliderStyle" ></li>
@@ -10,16 +10,16 @@
         <m-svg-icon name="hamburger" class="w-1.5 h-1.5"/>
       </li>
       <!--分类 item-->
-      <li @click="onItemClick(index)" :ref="setItemRef" v-for="item,index in $store.getters.categorys" :key="item.id" 
+      <li @click="onItemClick(item)" :ref="setItemRef" v-for="item,index in $store.getters.categorys" :key="item.id" 
         class="shrink-0 px-1.5 py-0.5 duration-200 last:mr-4 z-10"
-        :class="{'text-zinc-200': currentCategoryIndex === index}"
+        :class="{'text-zinc-200': $store.getters.currentCategoryIndex === index}"
         >
         {{item.name}}
       </li>
     </ul>
     <!--弹出层 popup-->
     <m-popup v-model="isVisible">
-      <menu-vue  @itemClick="itemClick" :currentCategoryIndex="currentCategoryIndex"></menu-vue>
+      <menu-vue  @itemClick="itemClick"></menu-vue>
     </m-popup>
   </div>
 </template>
@@ -27,6 +27,7 @@
 import { ref, watch,onBeforeUpdate } from 'vue'
 import { useScroll } from '@vueuse/core';
 import menuVue from '@/views/main/components/menu/index.vue'
+import { useStore } from 'vuex'
 // const props = defineProps({
 //   data: {
 //     type: Array,
@@ -34,17 +35,20 @@ import menuVue from '@/views/main/components/menu/index.vue'
 //   }
 // })
 
-
 // slider 的样式:
 const sliderStyle = ref({
   width: '52px',
   transform: 'translateX(0px)'
 })
 // 当前分类的 index
-const currentCategoryIndex = ref(0)
+// const currentCategoryIndex = ref(0)
+
+const store = useStore()
 // 切换 index
-const onItemClick = (index) => {
-  currentCategoryIndex.value = index
+const onItemClick = (item) => {
+  // currentCategoryIndex.value = index
+  // 已经使用 vuex了
+  store.commit('app/setCurrentCategory', item)
 } 
 // 所有 category 的 el 数组
 let itemRefs = []
@@ -60,7 +64,7 @@ const ulRef = ref(null)
 const { x: ulScrollLeft } = useScroll(ulRef)
 
 // 监听 currentCategoryIndex 的变化, 把对应元素的 width 和 left 赋值给slider的样式
-watch(currentCategoryIndex, (newIndex) => {
+watch(() => store.getters.currentCategoryIndex, (newIndex) => {
   const currentCategoryEl = itemRefs[newIndex]
   const { width, left } = currentCategoryEl.getBoundingClientRect()
   // 改样式
@@ -75,9 +79,10 @@ const onClickHamburger = () => {
   isVisible.value = true
 }
 
-// 家庭弹出层里面的 menu 的 item 点击 
-const itemClick = (index) => {
-  currentCategoryIndex.value = index
+// 监听弹出层里面的 menu 的 item 点击 
+const itemClick = (item) => {
+  // currentCategoryIndex.value = index
+  store.commit('app/setCurrentCategory', item)
   isVisible.value = false
 }
 </script>

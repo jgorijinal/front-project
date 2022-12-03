@@ -8,7 +8,7 @@ export default {
       currentCategory:  ALL_CATEGORY_ITEM 
     }
   },
-  mutation: {
+  mutations: {
     setCurrentCategory(state, newCategoryObj) {
       state.currentCategory = newCategoryObj
     }

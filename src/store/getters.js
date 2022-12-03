@@ -6,7 +6,7 @@ export default {
   // navigation 的当前选中项
   currentCategory: state => state.app.currentCategory,
   // navigation 的当前选中项的索引 index
-  currentCategory: (state, getters) => {
+  currentCategoryIndex: (state, getters) => {
     return getters.categorys.findIndex(category => {
       return category.id === getters.currentCategory.id
     })
