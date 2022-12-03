@@ -1,5 +1,5 @@
 <template>
-  <div class="sticky left-0 top-0 w-full z-40">
+  <div class="sticky left-0 top-0 w-full z-20">
     <mobile-navigation-vue v-if="isMobileTerminal"/>
     <pc-navigation-vue v-else/>
   </div>

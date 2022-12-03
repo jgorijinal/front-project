@@ -1,5 +1,5 @@
 <template>
-  <div class="sticky left-0 top-0 right-0 z-60 bg-white" >
+  <div class="sticky left-0 top-0 right-0 z-40 bg-white" >
     <ul ref="ulRef" class="relative flex overflow-x-auto overflow-hidden p-1 text-xs text-zinc-600">
       <!--slider 滑块-->
       <li  ref="sliderRef" class="absolute h-[22px] bg-zinc-700 rounded-lg duration-200" :style="sliderStyle" ></li>
