@@ -36,7 +36,7 @@ getPexelsData()
 
 // infinite-list 长列表组件相关逻辑
 const isLoading = ref(false)
-const isFinished = ref(true)
+const isFinished = ref(false)
 const onLoad = () => {
   console.log('列表加载完成, 请求下一页数据')
 }
