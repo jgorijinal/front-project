@@ -3,6 +3,7 @@
     <div class="relative rounded-md">
       <!--图片-->
       <img :src="item.photo" class="rounded" 
+        v-lazy
       :style="{
             height: (width / item.photoWidth) * item.photoHeight + 'px'
         }"

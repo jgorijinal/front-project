@@ -9,7 +9,8 @@ import 'virtual:svg-icons-register'
 import store from './store/index'
 import useTheme from '@/utils/theme'
 import {VueMasonryPlugin} from 'vue-masonry';
+import mDirectives from '@/directives'
 
 useREM()
 useTheme()
-createApp(App).use(router).use(store).use(VueMasonryPlugin).use(mlibs).mount('#app')
+createApp(App).use(mDirectives).use(router).use(store).use(VueMasonryPlugin).use(mlibs).mount('#app')
