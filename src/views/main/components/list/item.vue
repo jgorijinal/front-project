@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white dark:bg-zinc-900 xl:dark:bg-zinc-800  rounded  pb-1">
     <div 
-      class="relative rounded-md"
+      class="relative rounded-md border-white dark:border-black"
       :style="{backgroundColor: randomRGB()}"
       >
       <!--图片-->
@@ -56,7 +56,6 @@ const props = defineProps({
     type: Number,
   }
 })
-console.log(randomRGB())
 </script>
 <style lang="scss" scoped>
 </style>
