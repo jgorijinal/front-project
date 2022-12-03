@@ -1,10 +1,13 @@
 <template>
   <div class="bg-white dark:bg-zinc-900 xl:dark:bg-zinc-800  rounded  pb-1">
-    <div class="relative rounded-md">
+    <div 
+      class="relative rounded-md"
+      :style="{backgroundColor: randomRGB()}"
+      >
       <!--图片-->
-      <img :src="item.photo" class="rounded" 
+      <img :src="item.photo" class="rounded"  
         v-lazy
-      :style="{
+        :style="{
             height: (width / item.photoWidth) * item.photoHeight + 'px'
         }"
       alt="" >
@@ -43,6 +46,7 @@
   </div>
 </template>
 <script setup>
+import { randomRGB } from '@/utils/color'
 const props = defineProps({
   item: {
     type: Object,
@@ -52,6 +56,7 @@ const props = defineProps({
     type: Number,
   }
 })
+console.log(randomRGB())
 </script>
 <style lang="scss" scoped>
 </style>
