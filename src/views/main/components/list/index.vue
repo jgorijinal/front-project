@@ -83,7 +83,6 @@ watch(() => store.getters.currentCategory, (currentCategory) => {
     page: 1,
     categoryId:currentCategory.id
   })
-  getPexelsData()
 })
 </script>
 <style lang="scss" scoped>
