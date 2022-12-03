@@ -1,11 +1,12 @@
 <template>
   <div id="containerId">
-    <m-waterfull :data="pexelsData" :column="isMobileTerminal ? 2 : 5" nodeKey="id" class="w-full px-1" :picturePreReading="false">
-      <template v-slot="{item, width}">
-        <item-vue :item="item" :width="width"></item-vue>
-      </template>
-    </m-waterfull>
-    <m-infinite-list v-model="isLoading" :isFinished="isFinished" @onLoad="onLoad"></m-infinite-list>
+    <m-infinite-list v-model="isLoading" :isFinished="isFinished" @onLoad="getPexelsData">
+      <m-waterfull :data="pexelsData" :column="isMobileTerminal ? 2 : 5" nodeKey="id" class="w-full px-1" :picturePreReading="false">
+        <template v-slot="{item, width}">
+          <item-vue :item="item" :width="width"></item-vue>
+        </template>
+      </m-waterfull>
+    </m-infinite-list>
   </div>
 </template>
 <script setup>
@@ -13,8 +14,6 @@ import itemVue from './item.vue';
 import { getPexelsList } from '@/api/pexels'
 import { isMobileTerminal } from '@/utils/flexible';
 import { ref } from 'vue'
-
-
 // 图片列表
 const pexelsData = ref([])
 // 当前页码
@@ -23,23 +22,39 @@ const page = ref(1)
 const size = ref(20)
 // 总数据数
 const total = ref(0)
+
+// infinite-list 长列表组件相关逻辑
+const isLoading = ref(false)
+const isFinished = ref(false)
+
 const getPexelsData = async () => {
+  // 如果 isFinished 为 true , 则 return
+  if (isFinished.value) {
+    return 
+  }
+
+  isLoading.value = true
+
   const res = await getPexelsList({
     page: page.value,
     size:size.value
   })
   console.log(res.list)
-  pexelsData.value = res.list
+  // 注意 : 要追加数据!
+  pexelsData.value = [...pexelsData.value, ...res.list]
   total.value = res.total
+
+  isLoading.value = false
+  // 让 page 页码自增
+  if (res.list.length) {
+    page.value++
+  }
+  // 如果数据全部加载完, isFinished 设为 true
+  if (total.value === pexelsData.value.length) {
+    isFinished.value = true
+  }
 }
 getPexelsData()
-
-// infinite-list 长列表组件相关逻辑
-const isLoading = ref(false)
-const isFinished = ref(false)
-const onLoad = () => {
-  console.log('列表加载完成, 请求下一页数据')
-}
 </script>
 <style lang="scss" scoped>
   
