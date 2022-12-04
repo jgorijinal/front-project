@@ -2,7 +2,7 @@
   <div>
     <template v-for="item,index in hintData" :key="index">
       <div 
-        class="p-1 cursor-pointer text-base font-bold hover:bg-zinc-200 text-zinc-300
+        class="p-1 cursor-pointer text-base font-bold hover:bg-zinc-200 text-zinc-400
           rounded-sm duration-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
         @click="onItemClick(item)"
         v-html="highlightText(item)"

@@ -5,7 +5,7 @@
     >
       <template #dropdown>
         <div>
-          <hint-vue :searchText="inputValue" @itemClick="onSearchHandler"></hint-vue>
+          <hint-vue :searchText="inputValue" @itemClick="hintClickHandler"></hint-vue>
         </div>
       </template>
     </m-search>
@@ -19,9 +19,16 @@ import hintVue from './hint.vue'
 const inputValue = ref('123')
 
 // 点击了搜索按钮
-// 监听点击了某一个搜索提示
 // TODO : 点击了搜索历史中的某一项  
 const onSearchHandler = (item) => {
+  if (inputValue.value === '') {
+    return
+  }
+  inputValue.value = item
+  console.log('开始搜索', inputValue.value)
+}
+// 监听点击了某一个搜索提示
+const hintClickHandler = (item) => {
   inputValue.value = item
   console.log('开始搜索', inputValue.value)
 }
