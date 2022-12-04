@@ -8,7 +8,7 @@
         <hint-vue :searchText="inputValue" @itemClick="hintClickHandler" v-if="inputValue"></hint-vue>
         <div v-else>
           <!--搜索历史-->
-          <history-vue v-if="!inputValue"></history-vue>
+          <history-vue v-if="!inputValue" @itemClick="onSearchHandler"></history-vue>
         </div>
       </template>
     </m-search>
@@ -25,7 +25,7 @@ const inputValue = ref('123')
 
 const store = useStore()
 // 点击了搜索按钮
-// TODO : 点击了搜索历史中的某一项  
+// 或者 点击了搜索历史中的某一项  
 const onSearchHandler = (item) => {
   if (inputValue.value === '') {
     return

@@ -9,7 +9,7 @@
         @click.stop="deleteAllItems"
       ></m-svg-icon>  
     </div>
-    <div class="flex my-1" v-if="!$store.getters.histories === []">
+    <div class="flex my-1" v-if="$store.getters.histories !== []">
       <template v-for="item,index in $store.getters.histories" :key="index">
         <div class="bg-zinc-100 dark:bg-zinc-400 dark:hover:bg-zinc-500 flex items-center cursor-pointer hover:bg-zinc-200 rounded-sm 
           px-1 py-0.5 duration-200 mr-1 mb-1"
