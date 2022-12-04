@@ -3,7 +3,7 @@
     <m-search v-model="inputValue">
       <template #dropdown>
         <div>
-          <hint-vue :searchText="inputValue"></hint-vue>
+          <hint-vue :searchText="inputValue" @itemClick="onSearchHandler"></hint-vue>
         </div>
       </template>
     </m-search>
@@ -14,6 +14,11 @@ import { ref } from 'vue'
 import hintVue from './hint.vue';
 
 const inputValue = ref('123')
+
+// 监听点击了某一个搜索提示
+const onSearchHandler = (item) => {
+  inputValue.value = item
+}
 </script>
 <style lang="scss" scoped>
   
