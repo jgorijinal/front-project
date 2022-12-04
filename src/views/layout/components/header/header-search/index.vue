@@ -4,8 +4,11 @@
       @search="onSearchHandler"
     >
       <template #dropdown>
-        <div>
-          <hint-vue :searchText="inputValue" @itemClick="hintClickHandler"></hint-vue>
+        <!--搜索提示-->
+        <hint-vue :searchText="inputValue" @itemClick="hintClickHandler" v-if="inputValue"></hint-vue>
+        <div v-else>
+          <!--搜索历史-->
+          <history-vue v-if="!inputValue"></history-vue>
         </div>
       </template>
     </m-search>
@@ -14,6 +17,7 @@
 <script setup>
 import { ref } from 'vue'
 import hintVue from './hint.vue'
+import historyVue from './history.vue'
 import { useStore } from 'vuex'
 
 // 输入框的内容
