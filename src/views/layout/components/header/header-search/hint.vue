@@ -2,11 +2,11 @@
   <div>
     <template v-for="item,index in hintData" :key="index">
       <div 
-        class="p-1 cursor-pointer text-base font-bold hover:bg-zinc-200 
-          rounded-sm duration-100 dark:text-zinc-300 dark:hover:bg-zinc-900"
+        class="p-1 cursor-pointer text-base font-bold hover:bg-zinc-200 text-zinc-300
+          rounded-sm duration-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
         @click="onItemClick(item)"
+        v-html="highlightText(item)"
         >
-        {{item}}
       </div>
     </template>
   </div>
@@ -46,7 +46,13 @@ watchDebounced(() => props.searchText, getHintData, {
 const onItemClick = (item) => {
   emits(EMITS_ITEM_CLICK, item)
 }
-
+// 高亮提示文字
+const highlightText = (text) => {
+  const highlightStr = `<span class="text-zinc-900 dark:text-zinc-400">${props.searchText}</span>`
+   // 构建正则表达式，从《显示文本中》找出与《用户输入文本相同的内容》，使用《高亮标签》进行替换
+  const reg = new RegExp(props.searchText, 'gi')  
+  return text.replace(reg, highlightStr) 
+}
 </script>
 <style lang="scss" scoped>
   
