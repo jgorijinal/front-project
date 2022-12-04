@@ -10,5 +10,7 @@ export default {
     return getters.categorys.findIndex(category => {
       return category.id === getters.currentCategory.id
     })
-  }
+  },
+  // 搜素历史
+  histories: state => state.search.histories
 }
