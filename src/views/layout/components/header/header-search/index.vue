@@ -3,7 +3,7 @@
     <m-search v-model="inputValue">
       <template #dropdown>
         <div>
-          dropdown
+          <hint-vue :searchText="inputValue"></hint-vue>
         </div>
       </template>
     </m-search>
@@ -11,6 +11,8 @@
 </template>
 <script setup>
 import { ref } from 'vue'
+import hintVue from './hint.vue';
+
 const inputValue = ref('123')
 </script>
 <style lang="scss" scoped>
