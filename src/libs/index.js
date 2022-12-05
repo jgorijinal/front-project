@@ -8,7 +8,9 @@
 //   }
 // }
 export { confirm } from '@/libs/confirm'
+export { message } from '@/libs/message'
 import { defineAsyncComponent } from 'vue'
+
 
 export default {
   install(app) {

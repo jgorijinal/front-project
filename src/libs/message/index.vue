@@ -1,5 +1,5 @@
 <template>
-  <transition name="down"   @after-leave="destroyCallback">
+  <transition name="down" @after-leave="destroyCallback">
     <div v-if="isVisible"
       :class="styles[props.type].containerClass"
       class="min-w-[420px] fixed top-[20px] left-[50%] translate-x-[-50%] z-50 flex 
@@ -10,7 +10,7 @@
         class="h-1.5 w-1.5 mr-1.5"
         :fillClass="styles[props.type].fillClass"
       />
-      <span :class="styles[props.type].textClass">{{props.content}}</span>
+      <span class="text-base" :class="styles[props.type].textClass">{{props.content}}</span>
     </div>
   </transition>
 </template>
@@ -66,26 +66,27 @@ const props = defineProps({
   // 显示时长
   duration: {
     type: Number,
-    default:2000
+    default:3000
   },
   // 关闭时回调
   destroyCallback: {
     type: Function
   }
 })
-const isVisible = ref(true)
+const isVisible = ref(false)
 // 为了保证动画展示, 必须要 mounted 后显示, 因为使用 render 函数渲染的
 onMounted(() => {
   isVisible.value = true
   // 几秒后, 关闭
   setTimeout(() => {
-    isVisible.value = true
-  }, props.duration)
+    isVisible.value = false
+  }, Number(props.duration))
 })
 </script>
 <style lang="scss" scoped>
-  .down.enter-active , .down-leave-active {
-    transition: all 0.25 ease;
+  .down-enter-active , .down-leave-active {
+    transition: all 0.25s ease;
+    opacity: 1;
   } 
   .down-enter-from , .down-leave-to {
     opacity: 0;
