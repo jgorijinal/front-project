@@ -51,6 +51,7 @@
 </template>
 <script setup>
 import { randomRGB } from '@/utils/color'
+import { saveAs } from 'file-saver'
 const props = defineProps({
   item: {
     type: Object,
@@ -60,9 +61,9 @@ const props = defineProps({
     type: Number,
   }
 })
-
+// 下载图片
 const onDownload = () =>{
-  
+  saveAs(props.item.photoDownLink)
 }
 </script>
 <style lang="scss" scoped>
