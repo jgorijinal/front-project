@@ -7,7 +7,7 @@
 //     app.component('m-popup', popup)
 //   }
 // }
-
+export { confirm } from '@/libs/confirm'
 import { defineAsyncComponent } from 'vue'
 
 export default {

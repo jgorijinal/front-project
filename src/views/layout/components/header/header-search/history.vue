@@ -32,7 +32,7 @@ const EMITS_ITEM_CLICK = 'itemClick'
 </script>
 <script setup>
 import { useStore } from 'vuex'
-import { confirm } from '@/libs/confirm'
+import { confirm } from '@/libs'
 const emits = defineEmits([EMITS_ITEM_CLICK])
 
 const store = useStore()
