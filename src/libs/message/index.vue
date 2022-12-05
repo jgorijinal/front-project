@@ -1,5 +1,5 @@
 <template>
-  <transition name="down">
+  <transition name="down"   @after-leave="destroyCallback">
     <div v-if="isVisible"
       :class="styles[props.type].containerClass"
       class="min-w-[420px] fixed top-[20px] left-[50%] translate-x-[-50%] z-50 flex 
@@ -50,6 +50,7 @@ const props = defineProps({
   // 风格
   type: {
     type: String,
+    default:'success',
     validator(val) {
       const typeArr = Object.keys(styles)
       const result = typeArr.includes(val)
@@ -64,7 +65,8 @@ const props = defineProps({
   },
   // 显示时长
   duration: {
-    type: Number
+    type: Number,
+    default:2000
   },
   // 关闭时回调
   destroyCallback: {
