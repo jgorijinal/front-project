@@ -16,11 +16,11 @@
         >
         <!--标题-->
         <div class="text-lg font-bold text-zinc-900 dark:text-zinc-200 mb-2">
-          {{ title }}标题
+          {{ title }}
         </div>
         <!--内容-->
         <div  class="text-base text-zinc-900 dark:text-zinc-200 mb-2">
-          {{content}}内容
+          {{content}}
         </div>
         <!--按钮-->
         <div class="flex justify-end">
@@ -68,14 +68,17 @@ const props = defineProps({
 })
 // confirm 组件显示/隐藏
 const isVisible = ref(false)
+// 显示 confirm 组件 函数
+const show = () => {
+  isVisible.value = true
+}
 
 // ????? 为啥这样做 ? 
 onMounted(() => {
-  isVisible.value = true
+  show()
 })
 // 点击取消按钮
 const onCancelClick = () => {
-  console.log('取消')
   if (props.cancelHandler) {
     props.cancelHandler()
   }
@@ -118,6 +121,4 @@ const close = () => {
   // transform: translate3d(-50%, 100px, 0);
   transform: translate(-50%,100px);
 }
-
-
 </style>

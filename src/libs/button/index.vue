@@ -51,7 +51,7 @@ const sizeEnum = { // default small,  (icon-default , icon-small)
 </script>
 <script setup>
 import { computed } from 'vue';
-
+import mSvgIcon from '../svg-icon/index.vue'
 const props = defineProps({
   // icon图标名称
   icon: {
