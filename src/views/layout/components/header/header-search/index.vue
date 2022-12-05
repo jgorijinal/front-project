@@ -9,6 +9,8 @@
         <div v-else>
           <!--搜索历史-->
           <history-vue v-if="!inputValue" @itemClick="onSearchHandler"></history-vue>
+          <!--热门精选-->
+          <theme-vue v-if="!inputValue"></theme-vue>
         </div>
       </template>
     </m-search>
@@ -18,8 +20,8 @@
 import { ref } from 'vue'
 import hintVue from './hint.vue'
 import historyVue from './history.vue'
+import themeVue from './theme.vue'
 import { useStore } from 'vuex'
-
 // 输入框的内容
 const inputValue = ref('123')
 

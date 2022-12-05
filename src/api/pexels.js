@@ -17,3 +17,11 @@ export function getHint(q) {
     }
   })
 }
+
+
+// 获取热门主题
+export function getThemes() {
+  return request({
+    url: '/pexels/themes',
+  })
+}
