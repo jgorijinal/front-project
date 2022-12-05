@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex items-center">
-      <span class="text-sm dark:text-zinc-400">最近搜索</span>
+      <span class="text-sm dark:text-zinc-400 text-zinc-400">最近搜索</span>
       <m-svg-icon 
         name="delete"
         class="w-2.5 h-2.5 p-0.5 hover:bg-zinc-100 dark:hover:bg-zinc-500 ml-1 duration-200 cursor-pointer rounded-sm"
