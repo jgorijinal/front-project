@@ -34,13 +34,19 @@ const onSearchHandler = (item) => {
   }
   inputValue.value = item
   console.log('开始搜索', inputValue.value)
-  store.commit('search/addHistory', item )
+  store.commit('search/addHistory', item)
+
+  // Vuex 保存搜索文本
+  store.commit('app/setSearchText', item)
 }
 // 监听点击了某一个搜索提示
 const hintClickHandler = (item) => {
   console.log('开始搜索', inputValue.value)
   inputValue.value = item
-  store.commit('search/addHistory', item )
+  store.commit('search/addHistory', item)
+
+  // Vuex 保存搜索文本
+  store.commit('app/setSearchText', item)
 }
 </script>
 <style lang="scss" scoped>
