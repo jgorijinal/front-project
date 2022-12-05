@@ -72,11 +72,10 @@ const props = defineProps({
   }
 })
 const isVisible = ref(true)
-// 必须要 mounted 后显示, 因为使用 render 函数渲染的
+// 为了保证动画展示, 必须要 mounted 后显示, 因为使用 render 函数渲染的
 onMounted(() => {
   isVisible.value = true
-
-  // 几秒狗, 关闭
+  // 几秒后, 关闭
   setTimeout(() => {
     isVisible.value = true
   }, props.duration)
@@ -85,9 +84,9 @@ onMounted(() => {
 <style lang="scss" scoped>
   .down.enter-active , .down-leave-active {
     transition: all 0.25 ease;
-  }
+  } 
   .down-enter-from , .down-leave-to {
     opacity: 0;
-    transform: translate(-50%, 100px);
+    transform: translate(-50%, -100px);
   }
 </style>
