@@ -3,11 +3,15 @@
     <m-infinite-list v-model="isLoading" :isFinished="isFinished" @onLoad="getPexelsData">
       <m-waterfull :data="pexelsData" :column="isMobileTerminal ? 2 : 5" nodeKey="id" class="w-full px-1" :picturePreReading="false">
         <template v-slot="{item, width}">
-          <item-vue :item="item" :width="width" @click="onToDetail"></item-vue>
+          <item-vue :item="item" :width="width" @click="onToPins"></item-vue>
         </template>
       </m-waterfull>
     </m-infinite-list>
   </div>
+  <!--pins 图片详情页面-->
+  <transition :css="false" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+    <pins-vue v-if="isPinsVisible" :id="currentPins.id"></pins-vue>
+  </transition>
 </template>
 <script setup>
 import itemVue from './item.vue';
@@ -15,6 +19,7 @@ import { getPexelsList } from '@/api/pexels'
 import { isMobileTerminal } from '@/utils/flexible';
 import { ref, watch } from 'vue'
 import { useStore } from 'vuex' 
+import pinsVue from '@/views/pins/index.vue'
 
 const store = useStore()
 // 图片列表
@@ -98,13 +103,25 @@ watch(
     })
   }
 )
-
+// -------------------------------------------------------------pins 详情页-------------------------------------
+// 点击的 pins 的数据
+const currentPins = ref({})
+// pins 页面的显示/隐藏
+const isPinsVisible = ref(false)
 // 监听 item 组件传的图片 id , 改变 url 地址
-const onToDetail = (obj) => {
-  console.log(obj.id)
+const onToPins = (obj) => { // { 图片id , 图片中央位置信息 } 对象
+  currentPins.value = obj
+  isPinsVisible.value = true
   // 使用history api 的 pushState, 不刷新页面改变 url 地址
-  window.history.pushState(null, null, obj.id )
+  window.history.pushState(null, null, obj.id)
+
+  //img的中间位置 x,y
+  setTimeout(() => {
+    console.log(obj.imgCenterInfo.value)
+  },1000)
 }
+
+
 </script>
 <style lang="scss" scoped>
   

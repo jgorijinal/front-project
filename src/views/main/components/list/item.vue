@@ -16,7 +16,8 @@
       <!--遮罩层-->
       <div class="hidden xl:block opacity-0 hover:opacity-90 duration-300 hover:bg-zinc-800/70
         absolute z-10 left-0 top-0 w-full h-full rounded hover:cursor-zoom-in"
-          @click="onToDetailClick"
+        ref="imgTarget"
+          @click="onToPinsClick"
         >
         <!--一些按钮-->
         <!--分享-->
@@ -59,7 +60,8 @@ import { randomRGB } from '@/utils/color'
 import { saveAs } from 'file-saver'
 import { message } from '@/libs'
 import { useFullscreen } from '@vueuse/core';
-import { ref } from 'vue'
+import { ref,computed, nextTick } from 'vue'
+import { useElementBounding } from '@vueuse/core';
 const props = defineProps({
   item: {
     type: Object,
@@ -83,12 +85,26 @@ const imgRef = ref(null)
 const { enter:onImgFullscreen } = useFullscreen(imgRef)
 
 const emits = defineEmits(['click'])
-
+// --------------------------------------------- pins 详情页面 ------------------------------------------
 // 点击进入详情页面, 给父组件传 id
-const onToDetailClick = () => {
-  console.log('点击了图片详情') 
-  emits('click', {id: props.item.id})
+const onToPinsClick = () => {
+  console.log('item 中点击了图片详情') 
+  
+  // 使用 useElementBounding 拿到图片的位置信息
+  const { x, y, width, height } = useElementBounding(imgRef)
+
+  // 图片中心的位置信息
+  const imgCenterInfo = computed(() => {
+    return {
+      x: parseInt(x.value + (width.value / 2)),
+      y: parseInt(y.value + (height.value / 2))
+    }
+  })
+  emits('click', {
+    id: props.item.id,  // 图片 id
+    imgCenterInfo       // 图片中间位置信息 x,y
+  })
 } 
-</script>
+</script>)
 <style lang="scss" scoped>
 </style>
