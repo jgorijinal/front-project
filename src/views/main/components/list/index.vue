@@ -19,7 +19,7 @@ import { getPexelsList } from '@/api/pexels'
 import { isMobileTerminal } from '@/utils/flexible';
 import { ref, watch } from 'vue'
 import { useStore } from 'vuex' 
-import pinsVue from '@/views/pins/index.vue'
+import pinsVue from '@/views/pins/components/pins.vue'
 import gsap from 'gsap'
 
 const store = useStore()
