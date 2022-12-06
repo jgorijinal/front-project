@@ -2,7 +2,7 @@
 <div class="w-full bg-white border-b border-b-zinc-200 px-2 py-1 dark:bg-zinc-800 dark:border-b-zinc-700 duration-300">
   <div class="flex items-center">
     <!--logo-->
-    <img src="@/assets/vue.svg" class="h-4 cursor-pointer mr-2" alt="" @click="onClickLogo">
+    <img  src="@/assets/vue.svg" class="guide-home h-4 cursor-pointer mr-2" alt="" @click="onClickLogo">
     <!--search-->
     <header-search-vue class="mr-1"></header-search-vue>
     <!--theme-->

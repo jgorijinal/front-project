@@ -2,7 +2,7 @@
   <m-popover>
     <!--#reference-->
     <template #reference>
-      <div class="p-1 cursor-pointer bg-white rounded-md hover:bg-zinc-100 dark:bg-zinc-700 dark:hover:bg-zinc-800">
+      <div class="guide-theme p-1 cursor-pointer bg-white rounded-md hover:bg-zinc-100 dark:bg-zinc-700 dark:hover:bg-zinc-800">
         <m-svg-icon class="w-2 h-2" :name="currentThemeSvgName" fillClass="dark:fill-zinc-200"></m-svg-icon>
       </div>
     </template>
