@@ -10,7 +10,9 @@
         :style="{
             height: (width / item.photoWidth) * item.photoHeight + 'px'
         }"
-      alt="" >
+        alt="" 
+        ref="imgRef"
+      >
       <!--遮罩层-->
       <div class="hidden xl:block opacity-0 hover:opacity-90 duration-300 hover:bg-zinc-800/70
         absolute z-10 left-0 top-0 w-full h-full rounded hover:cursor-zoom-in">
@@ -39,6 +41,7 @@
           size="small"
           icon="full"
           iconClass="fill-zinc-900 dark:fill-zinc-200"
+          @click="onImgFullscreen"
         />
       </div>
     </div>
@@ -52,7 +55,9 @@
 <script setup>
 import { randomRGB } from '@/utils/color'
 import { saveAs } from 'file-saver'
-import { message} from '@/libs'
+import { message } from '@/libs'
+import { useFullscreen } from '@vueuse/core';
+import { ref } from 'vue'
 const props = defineProps({
   item: {
     type: Object,
@@ -70,6 +75,11 @@ const onDownload = () => {
     saveAs(props.item.photoDownLink)
   }, 1000)
 }
+
+// 全屏
+const imgRef = ref(null)
+const { enter:onImgFullscreen } = useFullscreen(imgRef)
+
 </script>
 <style lang="scss" scoped>
 </style>
