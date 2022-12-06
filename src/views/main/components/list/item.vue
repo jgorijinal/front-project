@@ -18,6 +18,7 @@
       <div class="hidden xl:block opacity-0 hover:opacity-90 duration-300 hover:bg-zinc-800/70
         absolute z-10 left-0 top-0 w-full h-full rounded hover:cursor-zoom-in"
         ref="maskRef"
+        @click="onToPinsClick"
         >
         <!--一些按钮-->
         <!--分享-->

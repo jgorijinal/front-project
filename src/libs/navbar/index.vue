@@ -28,7 +28,7 @@
   </div>
 </template>
 <script setup>
-import { useRouter } from 'vue-router'
+// import { useRouter } from 'vue-router'
 const props = defineProps({
   // 是否吸顶
   sticky: {
@@ -36,12 +36,12 @@ const props = defineProps({
   }
 })
 const emits = defineEmits(['clickLeft', 'clickRight'])
-const router = useRouter()
+// const router = useRouter()
 const onClickLeft = () => {
   console.log('点击了 左测区域')
   emits('clickLeft')
   // 后退
-  router.back()
+  // router.back()
 }
 
 const onClickRight = () => {
@@ -49,6 +49,3 @@ const onClickRight = () => {
   emits('clickRight')
 }
 </script>
-<style lang="scss" scoped>
-  
-</style>

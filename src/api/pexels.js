@@ -25,3 +25,10 @@ export function getThemes() {
     url: '/pexels/themes',
   })
 }
+
+// 获取指定图片数据
+export function getPexelById(id) {
+  return request({
+    url: `/pexels/${id}`
+  })
+}
