@@ -1,5 +1,6 @@
 <template>
-  <div class="h-full overflow-auto bg-white dark:bg-zinc-800 duration-500" >
+  <div class="h-full overflow-auto bg-white dark:bg-zinc-800 duration-500 
+      scrollbar-thin scrollbar-thumb-transparent xl:scrollbar-thumb-zinc-200 xl:dark:scrollbar-thumb-zinc-900 scrollbar-track-transparent" >
     <!--导航栏 pc/移动端-->
     <navigation-vue></navigation-vue>
     <!--图片列表-->
