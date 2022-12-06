@@ -16,7 +16,7 @@
       <!--遮罩层-->
       <div class="hidden xl:block opacity-0 hover:opacity-90 duration-300 hover:bg-zinc-800/70
         absolute z-10 left-0 top-0 w-full h-full rounded hover:cursor-zoom-in"
-        ref="imgTarget"
+        ref="maskRef"
           @click="onToPinsClick"
         >
         <!--一些按钮-->
@@ -88,8 +88,7 @@ const emits = defineEmits(['click'])
 // --------------------------------------------- pins 详情页面 ------------------------------------------
 // 点击进入详情页面, 给父组件传 id
 const onToPinsClick = () => {
-  console.log('item 中点击了图片详情') 
-  
+  // console.log('item 中点击了图片详情') 
   // 使用 useElementBounding 拿到图片的位置信息
   const { x, y, width, height } = useElementBounding(imgRef)
 

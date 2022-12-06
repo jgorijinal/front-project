@@ -20,6 +20,7 @@ import { isMobileTerminal } from '@/utils/flexible';
 import { ref, watch } from 'vue'
 import { useStore } from 'vuex' 
 import pinsVue from '@/views/pins/index.vue'
+import gsap from 'gsap'
 
 const store = useStore()
 // 图片列表
@@ -113,16 +114,44 @@ const onToPins = (obj) => { // { 图片id , 图片中央位置信息 } 对象
   currentPins.value = obj
   isPinsVisible.value = true
   // 使用history api 的 pushState, 不刷新页面改变 url 地址
-  window.history.pushState(null, null, obj.id)
+  window.history.pushState(null, null, `/pins/${obj.id}`)
 
   //img的中间位置 x,y
-  setTimeout(() => {
-    console.log(obj.imgCenterInfo.value)
-  },1000)
+  // console.log(obj.imgCenterInfo.value)
 }
 
+const beforeEnter = (el) => {
+  gsap.set(el, {
+    scaleX: 1,
+    scaleY: 1,
+    transformOrigin: '0 0',
 
+    opacity: 0
+  })
+}
+const enter = (el, done) => {
+  gsap.to(el, {
+    duration: 0.3,
+    scaleX: 1,
+    scaleY: 1,
+    opacity: 1,
+    translateX: 0,
+    translateY: 0,
+    onComplete: done
+  })
+}
+const leave = (el, done) => {
+  gsap.to(el, {
+    duration: 0.3,
+    scaleX: 0,
+    scaleY: 0,
+    x: currentPins.value.imgCenterInfo?.x,
+    y: currentPins.value.imgCenterInfo?.y,
+    opacity: 0
+  })
+}
+
+window.addEventListener('popstate', () => {
+  isPinsVisible.value = false
+})
 </script>
-<style lang="scss" scoped>
-  
-</style>
