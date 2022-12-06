@@ -3,7 +3,7 @@
     <m-infinite-list v-model="isLoading" :isFinished="isFinished" @onLoad="getPexelsData">
       <m-waterfull :data="pexelsData" :column="isMobileTerminal ? 2 : 5" nodeKey="id" class="w-full px-1" :picturePreReading="false">
         <template v-slot="{item, width}">
-          <item-vue :item="item" :width="width"></item-vue>
+          <item-vue :item="item" :width="width" @click="onToDetail"></item-vue>
         </template>
       </m-waterfull>
     </m-infinite-list>
@@ -99,6 +99,12 @@ watch(
   }
 )
 
+// 监听 item 组件传的图片 id , 改变 url 地址
+const onToDetail = (obj) => {
+  console.log(obj.id)
+  // 使用history api 的 pushState, 不刷新页面改变 url 地址
+  window.history.pushState(null, null, obj.id )
+}
 </script>
 <style lang="scss" scoped>
   

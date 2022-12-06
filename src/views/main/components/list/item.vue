@@ -15,7 +15,9 @@
       >
       <!--遮罩层-->
       <div class="hidden xl:block opacity-0 hover:opacity-90 duration-300 hover:bg-zinc-800/70
-        absolute z-10 left-0 top-0 w-full h-full rounded hover:cursor-zoom-in">
+        absolute z-10 left-0 top-0 w-full h-full rounded hover:cursor-zoom-in"
+          @click="onToDetailClick"
+        >
         <!--一些按钮-->
         <!--分享-->
         <m-button class="absolute top-1.5 left-1.5" type="main">分享</m-button>
@@ -80,6 +82,13 @@ const onDownload = () => {
 const imgRef = ref(null)
 const { enter:onImgFullscreen } = useFullscreen(imgRef)
 
+const emits = defineEmits(['click'])
+
+// 点击进入详情页面, 给父组件传 id
+const onToDetailClick = () => {
+  console.log('点击了图片详情') 
+  emits('click', {id: props.item.id})
+} 
 </script>
 <style lang="scss" scoped>
 </style>
