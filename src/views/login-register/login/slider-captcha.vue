@@ -17,18 +17,61 @@
         @click="onClose"
       ></m-svg-icon>
     </div>
+    <!--渲染 sliderCaptcha 的位置-->
     <div id="captcha"></div>
   </div>
 </template>
-
+<script>
+const EMITS_CLOSE = 'close'
+const EMITS_SUCCESS = 'success'
+</script>
 <script setup>
+import '@/vendor/SliderCaptcha/slidercaptcha.min.css'
+import '@/vendor/SliderCaptcha/longbow.slidercaptcha.min.js'
+import { getCaptcha } from '@/api/sys'
+import { onMounted } from 'vue'
+import { message } from '@/libs'
+
+const emits = defineEmits([EMITS_CLOSE, EMITS_SUCCESS])
+// sliderCaptcha 实例
+let captcha = null
+onMounted(() => {
+  captcha = sliderCaptcha({
+    // 渲染位置
+    id: 'captcha',
+    // 用户拼图成功之后的回调
+    async onSuccess(arr) {
+      const res = await getCaptcha({
+        behavior: arr
+      })
+      // 这里请求会返回 true
+      if (res) {
+        emits(EMITS_SUCCESS) 
+      }
+    },
+    // 用户拼图失败之后的回调
+    onFail() {
+      console.log('onFail')
+    },
+    // 默认的验证方法，不在此处进行验证，而是选择在用户拼图成功之后进行验证，所以此处永远返回为 true
+    verify() {
+      return true
+    }
+  })
+})
+
 /**
  * 重置
  */
-const onReset = () => {}
+const onReset = () => {
+  message('success', '刷新成功', 1000)
+  captcha.reset()
+}
 
 /**
  * 关闭
  */
-const onClose = () => {}
+const onClose = () => {
+  emits([EMITS_SUCCESS])
+}
 </script>
