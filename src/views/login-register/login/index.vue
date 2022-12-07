@@ -71,11 +71,14 @@
         <m-svg-icon class="w-4 cursor-pointer" name="wexin"></m-svg-icon>
       </div>
     </div>
+    <!-- 人类行为验证模块 -->
+    <slider-captcha-vue></slider-captcha-vue>
   </div>
 </template>
 <script setup>
 import { Form as VeeForm, Field as VeeField, ErrorMessage as VeeErrorMessage } from 'vee-validate'
 import { validateUsername, validatePassword } from '../validate'
+import sliderCaptchaVue from './slider-captcha.vue'
 
 // 点击登录按钮
 const onLoginHandler = (val) => {
