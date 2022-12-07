@@ -23,14 +23,18 @@
         </div>
       </template>
       <!--默认插槽: 气泡框里面的内容-->
-      <ul>
-        <template v-for="item in menuArr" :key="item.id"> 
+      <ul v-if="false">
+        <template v-for="item in menuArr" :key="item.id" > 
           <li class="flex items-center p-1 rounded-md hover:bg-zinc-100 cursor-pointer dark:bg-zinc-800 dark:hover:bg-zinc-700">
             <m-svg-icon :name="item.icon" class="w-1.5 h-1.5 mr-1" fillClass="dark:fill-zinc-200"/>
             <span class="text-sm dark:text-zinc-300">{{item.title}}</span>
         </li>
         </template>
       </ul>
+      <div v-else  class="flex items-center p-1 rounded-md hover:bg-zinc-100 cursor-pointer dark:bg-zinc-800 dark:hover:bg-zinc-700">
+        <m-svg-icon name="profile" class="w-1.5 h-1.5 mr-1" fillClass="dark:fill-zinc-200"/>
+        <span class="text-sm dark:text-zinc-300">点击登录</span>
+      </div>
     </m-popover>  
   </div>
 </template>
