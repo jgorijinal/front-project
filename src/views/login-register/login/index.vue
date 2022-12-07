@@ -4,12 +4,6 @@
   >
     <!-- 头部图标：PC端 -->
     <div class="hidden pt-5 h-8 xl:block">
-      <!-- <img
-        v-lazy
-        class="m-auto"
-        src="https://res.lgdsunday.club/signlogo.png"
-        alt=""
-      /> -->
       <img src="@/assets/vue.svg" class="m-auto w-7 h-7" alt="">
     </div>
     <!-- 头部图标：移动端 -->
