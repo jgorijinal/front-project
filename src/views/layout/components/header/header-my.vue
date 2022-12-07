@@ -31,7 +31,7 @@
         </li>
         </template>
       </ul>
-      <div v-else  class="flex items-center p-1 rounded-md hover:bg-zinc-100 cursor-pointer dark:bg-zinc-800 dark:hover:bg-zinc-700">
+      <div v-else @click="loginClick"  class="flex items-center p-1 rounded-md hover:bg-zinc-100 cursor-pointer dark:bg-zinc-800 dark:hover:bg-zinc-700">
         <m-svg-icon name="profile" class="w-1.5 h-1.5 mr-1" fillClass="dark:fill-zinc-200"/>
         <span class="text-sm dark:text-zinc-300">点击登录</span>
       </div>
@@ -39,6 +39,7 @@
   </div>
 </template>
 <script setup>
+import { useRouter } from 'vue-router'
 // menu 数据源
 const menuArr = [
   {
@@ -60,6 +61,11 @@ const menuArr = [
     path:''
   }
 ]
+const router = useRouter()
+const loginClick = () => {
+  // 跳转到登录页面
+  router.push('/login')
+}
 </script>
 <style lang="scss" scoped>
   
