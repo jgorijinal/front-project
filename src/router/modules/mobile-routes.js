@@ -9,5 +9,9 @@ export default [
     name: 'pins',
     component: () => import('@/views/pins/index.vue')
   },
-  
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/vies/login-register/login/index.vue')
+  }
 ]
