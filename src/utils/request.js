@@ -29,7 +29,7 @@ service.interceptors.response.use(res => {
   // token 超时
   if (err.response &&
       err.response.data &&
-      err.response.data.code
+      err.response.data.code === 401
     ) {
     store.dispatch('user/logoutAction')
   }
