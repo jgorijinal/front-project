@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
+import { message as messageWarn } from '@/libs'
 const service = axios.create({
   baseURL: import.meta.env.VITE_BASE_API,
   timeout: 5000
@@ -23,6 +24,7 @@ service.interceptors.response.use(res => {
   if (success) {
     return data
   } else {
+    messageWarn('warn', message)
     return Promise.reject(new Error(message))
   }
 }, (err) => {
@@ -33,6 +35,7 @@ service.interceptors.response.use(res => {
     ) {
     store.dispatch('user/logoutAction')
   }
+  // message('warn', err.response.data)
   return Promise.reject(err)
 })
 export default service

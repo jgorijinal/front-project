@@ -123,6 +123,8 @@ const onRegister = async () => {
     username: registerForm.value.username,
     password: registerForm.value.password,
   }
+
+  // await store.dispatch('user/registerAction', payload)
   try {
     await store.dispatch('user/registerAction', payload)
 
@@ -131,10 +133,10 @@ const onRegister = async () => {
       ...payload,
       loginType: LOGIN_TYPE_USERNAME
     })
-  } finally {
+    router.push('/')
+  }  finally {
     loading.value = false
   }
-  router.push('/')
 }
 
 </script>
