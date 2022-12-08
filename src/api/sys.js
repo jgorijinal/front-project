@@ -21,6 +21,7 @@ export function loginUser(data) {
 // 获取用户信息
 export function getProfile() {
   return request({
+    url:'/user/profile',
     method: 'get',
   })
 }

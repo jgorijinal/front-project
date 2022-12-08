@@ -116,7 +116,6 @@ const onCaptchaSuccess = async () => {
     loading.value = false
   }
   router.push('/')
-  message('success','登录成功', 2000)
 }
 //  sliderCaptcha 关闭
 const onCaptchaClose = () => {
