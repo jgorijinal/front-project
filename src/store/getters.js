@@ -14,5 +14,7 @@ export default {
   // 搜素历史
   histories: state => state.search.histories,
   // 搜索文本
-  searchText : state => state.app.searchText
+  searchText: state => state.app.searchText,
+  // token
+  token : state => state.user.token
 }

@@ -74,7 +74,7 @@
       </div>
     </div>
     <!-- 人类行为验证模块 -->
-    <slider-captcha-vue v-if="isCaptchaVisible" @success="onSuccess" @close="onClose"></slider-captcha-vue>
+    <slider-captcha-vue v-if="isCaptchaVisible" @success="onCaptchaSuccess" @close="onCaptchaClose"></slider-captcha-vue>
   </div>
 </template>
 <script setup>
@@ -100,7 +100,7 @@ const loading = ref(false)
 const store = useStore()
 const router = useRouter()
 // 行为验证成功
-const onSuccess = async () => {
+const onCaptchaSuccess = async () => {
   isCaptchaVisible.value = false
 
   //  登录操作
@@ -116,7 +116,7 @@ const onSuccess = async () => {
   router.push('/')
 }
 //  sliderCaptcha 关闭
-const onClose = () => {
+const onCaptchaClose = () => {
   isCaptchaVisible.value = false
 }
 </script>
