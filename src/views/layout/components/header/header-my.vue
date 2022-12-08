@@ -45,6 +45,7 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
+import { confirm } from '@/libs'
 // menu 数据源
 const menuArr = [
   {
@@ -78,8 +79,12 @@ const onItemClick = (item) =>{
     router.push(item.path)
     return 
   }
-  // 退出登录 action
-  store.dispatch('user/logoutAction')
+  confirm('提示', '你确定要退出登录吗?').then(() => {
+    // 退出登录 action
+    store.dispatch('user/logoutAction')
+  }).catch(() => {
+      console.log('取消')
+  })
 }
 </script>
 <style lang="scss" scoped>

@@ -41,7 +41,6 @@ export default {
     },
     // 退出登录
     logoutAction(context) {
-      message('success', '成功退出登录')
       context.commit('setToken', '')
       context.commit('setProfile', {})
       // 重新刷新页面 , 因为对于前台项目而言, 登录/未登录的页面效果不同
