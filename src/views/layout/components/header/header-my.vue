@@ -26,7 +26,10 @@
       <!--默认插槽: 气泡框里面的内容-->
       <ul v-if="$store.getters.token">
         <template v-for="item in menuArr" :key="item.id" > 
-          <li class="flex items-center p-1 rounded-md hover:bg-zinc-100 cursor-pointer dark:bg-zinc-800 dark:hover:bg-zinc-700">
+          <li 
+            class="flex items-center p-1 rounded-md hover:bg-zinc-100 cursor-pointer dark:bg-zinc-800 dark:hover:bg-zinc-700"
+            @click="onItemClick(item)"
+          >
             <m-svg-icon :name="item.icon" class="w-1.5 h-1.5 mr-1" fillClass="dark:fill-zinc-200"/>
             <span class="text-sm dark:text-zinc-300">{{item.title}}</span>
         </li>
@@ -41,6 +44,7 @@
 </template>
 <script setup>
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 // menu 数据源
 const menuArr = [
   {
@@ -66,6 +70,16 @@ const router = useRouter()
 const loginClick = () => {
   // 跳转到登录页面
   router.push('/login')
+}
+const store = useStore()
+const onItemClick = (item) =>{
+  console.log(item.path)
+  if (item.path) {
+    router.push(item.path)
+    return 
+  }
+  // 退出登录 action
+  store.dispatch('user/logoutAction')
 }
 </script>
 <style lang="scss" scoped>
