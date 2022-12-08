@@ -8,3 +8,13 @@ export function getCaptcha(data) {
     data
   })
 }
+
+// 登录
+export function loginUser(data) {
+  return request({
+    url: '/sys/login',
+    method: 'post',
+    data
+  })
+}
+

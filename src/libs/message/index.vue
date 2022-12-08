@@ -10,7 +10,7 @@
         class="h-1.5 w-1.5 mr-1.5"
         :fillClass="styles[props.type].fillClass"
       />
-      <span class="text-base" :class="styles[props.type].textClass">{{props.content}}</span>
+      <span class="text-sm" :class="styles[props.type].textClass">{{props.content}}</span>
     </div>
   </transition>
 </template>

@@ -85,7 +85,6 @@ import { ref } from 'vue'
 const isCaptchaVisible = ref(false)
 // 点击登录按钮
 const onLoginHandler = (val) => {
-  console.log(val)
   isCaptchaVisible.value = true
 }
 
