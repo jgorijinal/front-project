@@ -26,6 +26,13 @@ service.interceptors.response.use(res => {
     return Promise.reject(new Error(message))
   }
 }, (err) => {
+  // token 超时
+  if (err.response &&
+      err.response.data &&
+      err.response.data.code
+    ) {
+    store.dispatch('user/logoutAction')
+  }
   return Promise.reject(err)
 })
 export default service
