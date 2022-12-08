@@ -2,26 +2,8 @@
   <div
     class="relative h-screen bg-white dark:bg-zinc-700 text-center xl:bg-zinc-200"
   >
-    <!-- 头部图标：PC端 -->
-    <div class="hidden pt-5 h-8 xl:block">
-      <img src="@/assets/vue.svg" class="m-auto w-7 h-7" alt="">
-    </div>
-    <!-- 头部图标：移动端 -->
-    <div class="h-[111px] xl:hidden">
-      <img
-        v-lazy
-        class="dark:hidden"
-        src="https://res.lgdsunday.club/login-bg.png"
-        alt=""
-      />
-      <img
-        v-lazy
-        class="h-5 absolute top-[5%] left-[50%] translate-x-[-50%]"
-        src="@/assets/vue.svg"
-        alt=""
-        srcset=""
-      />
-    </div>
+  <!--头部图标-->
+  <header-vue></header-vue>
     <!-- 表单区 -->
     <div
       class="block px-3 mt-4 dark:bg-zinc-800 xl:bg-white xl:w-[388px] xl:dark:bg-zinc-900 xl:m-auto xl:mt-8 xl:py-4 xl:rounded-sm xl:shadow-lg"
@@ -54,13 +36,13 @@
         />
         <vee-error-message name="password"  class="text-sm text-red-600 block mt-0.5 text-left"></vee-error-message>
         <div class="pt-1 pb-3 leading-[0px] text-right">
-          <a
+          <router-link
             class="inline-block p-1 text-zinc-400 text-right dark:text-zinc-600 hover:text-zinc-600 dark:hover:text-zinc-400 text-sm duration-400 cursor-pointer"
+            to="/register"
           >
             去注册
-          </a>
+          </router-link>
         </div>
-
         <m-button class="w-full dark:bg-zinc-900 xl:dark:bg-zinc-800" :loading="loading" :isActiveAnim="true">
           登录
         </m-button>
@@ -85,7 +67,7 @@ import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { LOGIN_TYPE_USERNAME } from '@/constants'
 import { useRouter } from 'vue-router'
-import { message } from '@/libs'
+import headerVue from '../header.vue'
 
 const loginForm = ref({
   username: 'cuiyang1234',
