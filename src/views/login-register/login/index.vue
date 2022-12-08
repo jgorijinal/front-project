@@ -85,6 +85,8 @@ import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { LOGIN_TYPE_USERNAME } from '@/constants'
 import { useRouter } from 'vue-router'
+import { message } from '@/libs'
+
 const loginForm = ref({
   username: 'cuiyang1234',
   password: '123456'
@@ -114,6 +116,7 @@ const onCaptchaSuccess = async () => {
     loading.value = false
   }
   router.push('/')
+  message('success','登录成功', 2000)
 }
 //  sliderCaptcha 关闭
 const onCaptchaClose = () => {

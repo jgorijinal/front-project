@@ -9,12 +9,19 @@ export function getCaptcha(data) {
   })
 }
 
-// 登录
+// 登录请求
 export function loginUser(data) {
   return request({
     url: '/sys/login',
     method: 'post',
     data
+  })
+}
+
+// 获取用户信息
+export function getProfile() {
+  return request({
+    method: 'get',
   })
 }
 
