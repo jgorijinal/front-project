@@ -24,3 +24,10 @@ export const validatePassword = (value) => {
   }
   return true
 }
+
+export const validateConfirmPassword = (value, arr) => {
+  if (value !== arr[0]) {
+    return '两次密码不一致'
+  }
+  return true
+}

@@ -43,7 +43,7 @@
             去注册
           </router-link>
         </div>
-        <m-button class="w-full dark:bg-zinc-900 xl:dark:bg-zinc-800" :loading="loading" :isActiveAnim="true">
+        <m-button type="main" class="w-full dark:bg-zinc-900 xl:dark:bg-zinc-800" :loading="loading" :isActiveAnim="true">
           登录
         </m-button>
       </vee-form>

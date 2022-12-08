@@ -1,5 +1,7 @@
 <template>
-  <div  class="relative h-screen bg-white dark:bg-zinc-700 text-center xl:bg-zinc-200">
+  <div
+    class="relative h-screen bg-white dark:bg-zinc-700 text-center xl:bg-zinc-200"
+  >
     <header-vue></header-vue>
     <!--表单区-->
     <div
@@ -19,6 +21,7 @@
           type="text"
           placeholder="用户名"
           autocomplete="on"
+          :rules="validateUsername"
         />
         <vee-error-message
           class="text-sm text-red-600 block mt-0.5 text-left"
@@ -32,6 +35,7 @@
           type="password"
           placeholder="密码"
           autocomplete="on"
+          :rules="validatePassword"
         />
         <vee-error-message
           class="text-sm text-red-600 block mt-0.5 text-left"
@@ -45,6 +49,7 @@
           type="password"
           placeholder="确认密码"
           autocomplete="on"
+          rules="validateConfirmPassword:@password"
         />
         <vee-error-message
           class="text-sm text-red-600 block mt-0.5 text-left"
@@ -54,13 +59,12 @@
 
         <div class="pt-1 pb-3 leading-[0px] text-right">
           <div class="mb-2">
-            <a
+            <router-link
               class="inline-block p-1 text-zinc-400 text-right dark:text-zinc-600 hover:text-zinc-600 dark:hover:text-zinc-400 text-sm duration-400 cursor-pointer"
-              target="__black"
-              @click="onToLogin"
+              to="/login"
             >
               去登录
-            </a>
+            </router-link>
           </div>
           <!-- <div class="text-center">
             <a
@@ -74,6 +78,7 @@
         </div>
 
         <m-button
+          type="main"
           class="w-full dark:bg-zinc-900 xl:dark:bg-zinc-800"
         >
           立即注册
@@ -84,8 +89,14 @@
 </template>
 <script setup>
 import headerVue from '../header.vue'
-import { Form as VeeForm, Field as VeeField, ErrorMessage as VeeErrorMessage } from 'vee-validate'
+import {
+  Form as VeeForm,
+  Field as VeeField,
+  ErrorMessage as VeeErrorMessage,
+  defineRule
+} from 'vee-validate'
+import {validatePassword,validateUsername , validateConfirmPassword } from '../validate'
 
+defineRule('validateConfirmPassword', validateConfirmPassword)
 </script>
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
