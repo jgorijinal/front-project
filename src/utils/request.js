@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import store from '@/store'
 const service = axios.create({
   baseURL: import.meta.env.VITE_BASE_API,
   timeout: 5000
@@ -8,6 +8,10 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use((config) => {
   config.headers.icode = '719F9EBC312A0655'
+  if (store.getters.token) {
+    // 如果 token 存在, 纳米请求头设置 token
+    config.headers.Authorization = 'Bearer ' + store.getters.token
+  }
   return config
 }, (err) => {
   return Promise.reject(err)
