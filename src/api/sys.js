@@ -26,3 +26,11 @@ export function getProfile() {
   })
 }
 
+// 注册
+export function registerUser(data) {
+  return request({
+    url: '/sys/register',
+    data
+  })
+}
+
