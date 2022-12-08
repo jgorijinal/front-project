@@ -38,6 +38,13 @@ export default {
       context.commit('setProfile', res)
       // 登录提示
       message('success', `欢迎你, ${ res.username }`)
+    },
+    // 退出登录
+    logoutAction(context) {
+      context.commit('setToken', '')
+      context.commit('setUserInfo',{})
+      // 重新刷新页面 , 因为对于前台项目而言, 登录/未登录的页面效果不同
+      location.reload()
     }
   }
 }
