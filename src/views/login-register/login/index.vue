@@ -40,6 +40,7 @@
           placeholder="用户名"
           autocomplete="on"
           :rules="validateUsername"
+          v-model="loginForm.username"
         />
         <vee-error-message name="username"  class="text-sm text-red-600 block mt-0.5 text-left"></vee-error-message>
         <vee-field
@@ -48,6 +49,7 @@
           type="password"
           placeholder="密码"
           autocomplete="on"
+          v-model="loginForm.password"
           :rules="validatePassword"
         />
         <vee-error-message name="password"  class="text-sm text-red-600 block mt-0.5 text-left"></vee-error-message>
@@ -59,7 +61,7 @@
           </a>
         </div>
 
-        <m-button class="w-full dark:bg-zinc-900 xl:dark:bg-zinc-800">
+        <m-button class="w-full dark:bg-zinc-900 xl:dark:bg-zinc-800" :loading="loading" :isActiveAnim="true">
           登录
         </m-button>
       </vee-form>
@@ -80,20 +82,40 @@ import { Form as VeeForm, Field as VeeField, ErrorMessage as VeeErrorMessage } f
 import { validateUsername, validatePassword } from '../validate'
 import sliderCaptchaVue from './slider-captcha.vue'
 import { ref } from 'vue' 
-
-// // 控制 sliderCaptcha 显示/隐藏
+import { useStore } from 'vuex'
+import { LOGIN_TYPE_USERNAME } from '@/constants'
+import { useRouter } from 'vue-router'
+const loginForm = ref({
+  username: 'cuiyang1234',
+  password: '123456'
+})
+// 控制 sliderCaptcha 显示/隐藏
 const isCaptchaVisible = ref(false)
 // 点击登录按钮
 const onLoginHandler = (val) => {
   isCaptchaVisible.value = true
 }
-
+// 登录按钮 loading
+const loading = ref(false)
+const store = useStore()
+const router = useRouter()
 // 行为验证成功
-const onSuccess = () => {
+const onSuccess = async () => {
   isCaptchaVisible.value = false
-  // TODO: 登录请求
+
+  //  登录操作
+  loading.value = true
+  try {
+    await store.dispatch('user/loginAction', {
+      ...loginForm.value,
+      loginType: LOGIN_TYPE_USERNAME
+  }) 
+  } finally {
+    loading.value = false
+  }
+  router.push('/')
 }
-// //  sliderCaptcha 关闭
+//  sliderCaptcha 关闭
 const onClose = () => {
   isCaptchaVisible.value = false
 }
