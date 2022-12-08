@@ -1,4 +1,4 @@
-import { loginUser, getProfile } from '@/api/sys'
+import { loginUser, getProfile, registerUser } from '@/api/sys'
 import md5 from 'md5'
 import { message } from '@/libs'
 export default {
@@ -45,6 +45,14 @@ export default {
       context.commit('setProfile', {})
       // 重新刷新页面 , 因为对于前台项目而言, 登录/未登录的页面效果不同
       location.reload()
+    },
+    // 注册
+    async registerAction(context, payload) {
+      const { password } = payload
+      return await registerUser({
+        ...payload,
+        password: password ? md5(password) : '' 
+      })
     }
   }
 }

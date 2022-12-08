@@ -13,7 +13,7 @@
         注册账号
       </h3>
       <!-- 表单 -->
-      <vee-form>
+      <vee-form @submit="onRegister">
         <!-- 用户名 -->
         <vee-field
           class="dark:bg-zinc-800 dark:text-zinc-400 border-b-zinc-400 border-b-[1px] w-full outline-0 pb-1 px-1 text-base focus:border-b-main dark:focus:border-b-zinc-200 xl:dark:bg-zinc-900"
@@ -22,6 +22,7 @@
           placeholder="用户名"
           autocomplete="on"
           :rules="validateUsername"
+          v-model="registerForm.username"
         />
         <vee-error-message
           class="text-sm text-red-600 block mt-0.5 text-left"
@@ -36,6 +37,7 @@
           placeholder="密码"
           autocomplete="on"
           :rules="validatePassword"
+          v-model="registerForm.password"
         />
         <vee-error-message
           class="text-sm text-red-600 block mt-0.5 text-left"
@@ -50,6 +52,7 @@
           placeholder="确认密码"
           autocomplete="on"
           rules="validateConfirmPassword:@password"
+          v-model="registerForm.confirmPassword"
         />
         <vee-error-message
           class="text-sm text-red-600 block mt-0.5 text-left"
@@ -96,7 +99,43 @@ import {
   defineRule
 } from 'vee-validate'
 import {validatePassword,validateUsername , validateConfirmPassword } from '../validate'
-
+import { ref } from 'vue'
+import { useStore } from 'vuex'
+import { LOGIN_TYPE_USERNAME } from '@/constants' 
+import { useRouter } from 'vue-router'
+// 注册新的校验规则
 defineRule('validateConfirmPassword', validateConfirmPassword)
+
+// 注册表单
+const registerForm = ref({
+  username: '',
+  password: '',
+  confirmPassword: ''
+})
+const loading = ref(false) 
+const store = useStore()
+const router = useRouter()
+// 点击注册
+const onRegister = async () => {
+  loading.value = true
+
+  const payload = {
+    username: registerForm.value.username,
+    password: registerForm.value.password,
+  }
+  try {
+    await store.dispatch('user/registerAction', payload)
+
+    // 注册成功 , 那么久直接登录
+    await store.dispatch('user/loginAction', {
+      ...payload,
+      loginType: LOGIN_TYPE_USERNAME
+    })
+  } finally {
+    loading.value = false
+  }
+  router.push('/')
+}
+
 </script>
 <style lang="scss" scoped></style>

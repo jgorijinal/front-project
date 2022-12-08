@@ -30,6 +30,7 @@ export function getProfile() {
 export function registerUser(data) {
   return request({
     url: '/sys/register',
+    method:'post',
     data
   })
 }
