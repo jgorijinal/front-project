@@ -17,13 +17,14 @@
         ></m-svg-icon>
         <!-- vip 标记 -->
         <m-svg-icon
+          v-if="$store.getters.userInfo.viplevel"
           name="vip"
           class="w-1.5 h-1.5 absolute right-[16px] bottom-0"
         ></m-svg-icon>
         </div>
       </template>
       <!--默认插槽: 气泡框里面的内容-->
-      <ul v-if="false">
+      <ul v-if="$store.getters.token">
         <template v-for="item in menuArr" :key="item.id" > 
           <li class="flex items-center p-1 rounded-md hover:bg-zinc-100 cursor-pointer dark:bg-zinc-800 dark:hover:bg-zinc-700">
             <m-svg-icon :name="item.icon" class="w-1.5 h-1.5 mr-1" fillClass="dark:fill-zinc-200"/>
