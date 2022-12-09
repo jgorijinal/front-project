@@ -12,7 +12,10 @@ export default [
       {
         path: 'profile',
         name: 'profile',
-        component: () => import('@/views/profile/index.vue')
+        component: () => import('@/views/profile/index.vue'),
+        meta: {
+          user: true
+        }
       },
     ]
   },
