@@ -6,7 +6,7 @@
       class="relative max-w-screen-lg mx-auto bg-white dark:bg-zinc-900 duration-400 xl:rounded-sm xl:border-zinc-200 xl:dark:border-zinc-600 xl:border-[1px] xl:px-4 xl:py-2"
     >
       <!-- 移动端 navbar -->
-      <m-navbar sticky v-if="isMobileTerminal" :clickLeft="onNavbarLeftClick">
+      <m-navbar sticky v-if="isMobileTerminal" @clickLeft="onNavbarLeftClick">
         个人资料
       </m-navbar>
       <!-- pc 端 -->
@@ -132,10 +132,22 @@
         </m-button>
       </div>
     </div>
-    <!-- dialog 组件-->
-    <m-dialog v-model="isDialogVisible" title="标题">
-      <img :src="currentBlob" alt="">
+    <!-- 图片展示-->
+    <!-- PC 端 -->
+    <m-dialog v-if="!isMobileTerminal" v-model="isDialogVisible">
+      <change-avatar-vue
+        :blob="currentBlob"
+        @close="isDialogVisible = false"
+      ></change-avatar-vue>
     </m-dialog>
+    <!-- 移动端：在展示时指定高度 -->
+    <m-popup v-else :class="{ 'h-screen': isDialogVisible }" v-model="isDialogVisible">
+      <change-avatar-vue
+        :blob="currentBlob"
+        @close="isDialogVisible = false"
+      ></change-avatar-vue>
+    </m-popup>
+
   </div>
 </template>
 
@@ -150,8 +162,8 @@ import { isMobileTerminal } from '@/utils/flexible'
 import { confirm } from '@/libs'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-import { ref } from 'vue'
-
+import { ref,watch } from 'vue'
+import changeAvatarVue from './components/change-avatar.vue'
 const store = useStore()
 const router = useRouter()
 // 用户的信息
@@ -189,12 +201,19 @@ const onSelectImgHandler = () => {
   // 再打开 dialog 显示
   isDialogVisible.value = true
 }
-
+// file-input 如果处理同一个图片文件就不会触发 change 事件
+// 所以解决办法就是: 每次使用完毕就把他的 value 置空
+watch(isDialogVisible, (val) => {
+  if (!val) {
+    inputFileTarget.value.value = null
+  }
+})
 /**
  * 移动端后退处理
  */
 const onNavbarLeftClick = () => {
   router.back()
+  console.log(23)
 }
 
 const loading = ref(false)
