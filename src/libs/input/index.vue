@@ -1,15 +1,23 @@
 <template>
   <div class="relative">
-    <input type="text" v-if="(type === TYPE_TEXT)" :maxlength="max" :value="modelValue" @input="onInput($event)">
-    <textarea v-else-if="(type === TYPE_TEXTAREA)" cols="30" rows="10" :maxlength="max" :value="modelValue"  @input="onInput($event)"></textarea>
+    <input type="text" 
+      class="border-gray-200 dark:border-zinc-600 dark:bg-zinc-800 duration-100
+        dark:text-zinc-400 border-[1px] outline-0 py-0.5 px-1 text-sm rounded-sm focus:border-blue-400 w-full"
+      v-if="(type === TYPE_TEXT)" :maxlength="max" :value="modelValue" @input="onInput($event)">
+    <textarea 
+      class="border-gray-200 dark:border-zinc-600 dark:bg-zinc-800 duration-100 
+      dark:text-zinc-400 border-[1px] outline-0 py-0.5 px-1 text-sm rounded-sm focus:border-blue-400 w-full"
+      v-else-if="(type === TYPE_TEXTAREA)" cols="30" rows="10" :maxlength="max" :value="modelValue"  @input="onInput($event)"></textarea>
     <!--最大字符提示-->
-    <span v-if="max" class="absolute right-0 bottom-0 text-base text-zinc-500">{{currentLength}}/{{max}}</span>
+    <span v-if="max" class="absolute right-1 bottom-0.5 text-zinc-400 text-xs">{{currentLength}}/{{max}}</span>
   </div>
 </template>
-<script setup>
-import { computed } from 'vue';
+<script>
 const TYPE_TEXT = 'text'
 const TYPE_TEXTAREA = 'textarea'
+</script>
+<script setup>
+import { computed } from 'vue';
 const props = defineProps({
   modelValue: {
     type:String
