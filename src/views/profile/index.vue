@@ -29,9 +29,11 @@
               :src="userInfo.avatar"
               alt=""
               class="rounded-[50%] w-full h-full xl:inline-block"
+              @click="onAvatarClick"
             />
             <div
               class="absolute top-0 rounded-[50%] w-full h-full bg-[rgba(0,0,0,.4)] hidden xl:group-hover:block"
+              @click="onAvatarClick"
             >
               <m-svg-icon
                 name="change-header-image"
@@ -130,6 +132,10 @@
         </m-button>
       </div>
     </div>
+    <!-- dialog 组件-->
+    <m-dialog v-model="isDialogVisible" title="标题">
+      <img :src="currentBlob" alt="">
+    </m-dialog>
   </div>
 </template>
 
@@ -166,11 +172,23 @@ const inputFileTarget = ref(null)
 const onAvatarClick = () => {
   inputFileTarget.value.click()
 }
-
+// 当前选中图片的 blob 对象
+const currentBlob = ref('')
+// dialog 显示/隐藏
+const isDialogVisible = ref(false)
 /**
- * 头像选择之后的回调
+ * 头像图片选择之后的回调
  */
-const onSelectImgHandler = () => {}
+const onSelectImgHandler = () => {
+  // 获取选中的文件
+  const imgFile = inputFileTarget.value.files[0]
+  // 生成 blob 对象
+  const blob = URL.createObjectURL(imgFile)
+  // 赋值
+  currentBlob.value = blob
+  // 再打开 dialog 显示
+  isDialogVisible.value = true
+}
 
 /**
  * 移动端后退处理
@@ -199,5 +217,4 @@ const onLogoutClick = () => {
   })
   router.push('/')
 }
-
 </script>
