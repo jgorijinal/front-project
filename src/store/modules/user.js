@@ -1,4 +1,4 @@
-import { loginUser, getProfile, registerUser } from '@/api/sys'
+import { loginUser, getProfile, registerUser, putProfile } from '@/api/sys'
 import md5 from 'md5'
 import { message } from '@/libs'
 export default {
@@ -13,7 +13,7 @@ export default {
     setToken(state, newToken) {
       state.token = newToken
     },
-    setProfile(state, newUserInfo) {
+    setUserInfo(state, newUserInfo) {
       state.userInfo = newUserInfo
     }
   },
@@ -35,14 +35,14 @@ export default {
     // 获取用户信息 action
     async getProfileAction(context,) {
       const res = await getProfile()
-      context.commit('setProfile', res)
+      context.commit('setUserInfo', res)
       // 登录提示
       message('success', `欢迎你, ${ res.username }`)
     },
     // 退出登录
     logoutAction(context) {
       context.commit('setToken', '')
-      context.commit('setProfile', {})
+      context.commit('setUserInfo', {})
       // 重新刷新页面 , 因为对于前台项目而言, 登录/未登录的页面效果不同
       location.reload()
     },
@@ -53,6 +53,15 @@ export default {
         ...payload,
         password: password ? md5(password) : '' 
       })
+    },
+    // 修改个人信息
+    async changeProfileAction(context, data) {
+      // 发起真正请求
+      await putProfile(data)
+
+      message('success' , '成功修改用户信息')
+      // 修改state的userInfo
+      context.commit('setUserInfo', { ...context.state.userInfo, ...data })
     }
   }
 }

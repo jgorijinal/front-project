@@ -26,7 +26,7 @@
           >
             <img
               v-lazy
-              :src="$store.getters.userInfo.avatar"
+              :src="userInfo.avatar"
               alt=""
               class="rounded-[50%] w-full h-full xl:inline-block"
             />
@@ -62,7 +62,7 @@
             >用户名</span
           >
           <m-input
-            v-model="$store.getters.userInfo.nickname"
+            v-model="userInfo.nickname"
             class="w-full"
             type="text"
             max="20"
@@ -74,7 +74,7 @@
             >职位</span
           >
           <m-input
-            v-model="$store.getters.userInfo.title"
+            v-model="userInfo.title"
             class="w-full"
             type="text"
           ></m-input>
@@ -85,7 +85,7 @@
             >公司</span
           >
           <m-input
-            v-model="$store.getters.userInfo.company"
+            v-model="userInfo.company"
             class="w-full"
             type="text"
           ></m-input>
@@ -96,7 +96,7 @@
             >个人主页</span
           >
           <m-input
-            v-model="$store.getters.userInfo.homePage"
+            v-model="userInfo.homePage"
             class="w-full"
             type="text"
           ></m-input>
@@ -107,7 +107,7 @@
             >个人介绍</span
           >
           <m-input
-            v-model="$store.getters.userInfo.introduction"
+            v-model="userInfo.introduction"
             class="w-full"
             type="textarea"
             max="50"
@@ -116,6 +116,8 @@
         <!-- 保存修改 -->
         <m-button
           class="w-full mt-2 mb-4 dark:text-zinc-300 dark:bg-zinc-800 xl:w-[160px] xl:ml-[50%] xl:translate-x-[-50%]"
+          :loading="loading"
+          @click="onChangeProfile"
           >保存修改</m-button
         >
         <!-- 移动端退出登录 -->
@@ -146,6 +148,15 @@ import { ref } from 'vue'
 
 const store = useStore()
 const router = useRouter()
+// 用户的信息
+const userInfo = ref({
+  nickname: store.getters.userInfo.nickname,
+  title: store.getters.userInfo.title,
+  company:store.getters.userInfo.company,
+  homePage: store.getters.userInfo.homePage,
+  introduction: store.getters.userInfo.introduction,
+  avatar: store.getters.userInfo.avatar
+})
 
 // 隐藏域
 const inputFileTarget = ref(null)
@@ -168,6 +179,17 @@ const onNavbarLeftClick = () => {
   router.back()
 }
 
+const loading = ref(false)
+
+/**
+ *  点击修改个人信息
+ * */ 
+const onChangeProfile = async () => {
+  // 调修改个人信息 action
+  loading.value = true
+  await store.dispatch('user/changeProfileAction', userInfo.value)
+  loading.value = false
+}
 /**
  * 移动端：退出登录
  */
@@ -175,5 +197,7 @@ const onLogoutClick = () => {
   confirm('确定要退出登录吗？').then(() => {
     store.dispatch('user/logoutAction')
   })
+  router.push('/')
 }
+
 </script>
