@@ -138,13 +138,15 @@
       <change-avatar-vue
         :blob="currentBlob"
         @close="isDialogVisible = false"
+        @upload-success="userInfo.avatar = $event"
       ></change-avatar-vue>
     </m-dialog>
     <!-- 移动端：在展示时指定高度 -->
     <m-popup v-else :class="{ 'h-screen': isDialogVisible }" v-model="isDialogVisible">
       <change-avatar-vue
-        :blob="currentBlob"
+        :blob="currentBlob" 
         @close="isDialogVisible = false"
+        @upload-success="userInfo.avatar = $event"
       ></change-avatar-vue>
     </m-popup>
 

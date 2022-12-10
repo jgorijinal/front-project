@@ -19,6 +19,7 @@
 
 <script>
 const EMITS_CLOSE = 'close'
+const EMITS_UPLOAD_SUCCESS= 'upload-success'
 </script>
 
 <script setup>
@@ -26,7 +27,9 @@ import { ref,onMounted } from 'vue'
 import Cropper from 'cropperjs'
 import 'cropperjs/dist/cropper.css'
 import { isMobileTerminal } from '@/utils/flexible'
-
+import { getOSSClient } from '@/utils/sts'
+import { useStore } from 'vuex'
+import { message} from '@/libs'
 defineProps({
   blob: {
     type: String,
@@ -34,7 +37,7 @@ defineProps({
   }
 })
 
-const emits = defineEmits([EMITS_CLOSE])
+const emits = defineEmits([EMITS_CLOSE, EMITS_UPLOAD_SUCCESS])
 
 // 移动端配置对象
 const mobileOptions = {
@@ -81,9 +84,14 @@ const onConfirmClick = () => {
   // 开启 loading
   loading.value = true
   // 获取裁剪后的图片
-  cropper.getCroppedCanvas().toBlob((blob) => {
-    // 裁剪后的 blob 地址
-    console.log(URL.createObjectURL(blob))
+  cropper.getCroppedCanvas().toBlob(async (blob) => {
+    // 裁剪后的 blob
+    // console.log(blob)
+    // console.log(URL.createObjectURL(blob))
+    await putObjectToOSS(blob)
+    // 关闭 loading
+    loading.value = false
+    close()
   })
 }
 
@@ -92,5 +100,32 @@ const onConfirmClick = () => {
  */
 const close = () => {
   emits(EMITS_CLOSE)
+}
+
+/**
+ * 进行 OSS 上传
+ */
+let ossClient = null
+let store = useStore()
+const putObjectToOSS = async (file) => {
+  if (!ossClient) {
+    ossClient = await getOSSClient()
+  }
+  try {
+    // 因为当前凭证只具备 images 文件夹下的访问权限，所以图片需要上传到 images/xxx.xx 。否则你将得到一个 《AccessDeniedError: You have no right to access this object because of bucket acl.》 的错误
+    const fileTypeArr = file.type.split('/')
+    const fileName = `${store.getters.userInfo.username}/${Date.now()}.${
+      fileTypeArr[fileTypeArr.length - 1]
+    }`
+		// 文件存放路径，文件
+    const res = await ossClient.put(`images/${fileName}`, file)
+    console.log(res.url)
+    // TODO：图片上传到服务器, 更新用户信息
+    await store.dispatch('user/changeProfileAction', { ...store.getters.userInfo, avatar: res.url })
+    emits(EMITS_UPLOAD_SUCCESS, res.url)
+    message('success', '头像修改成功')
+  } catch (e) {
+    message('error', e)
+  }
 }
 </script>
