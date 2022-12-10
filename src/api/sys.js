@@ -43,3 +43,13 @@ export const putProfile = (data) => {
   })
 }
 
+// 获取上传文件临时凭证
+export function getSts() {
+  return request({
+    url: '/user/sts',
+    method:'get'
+  })
+}
+
+
+
