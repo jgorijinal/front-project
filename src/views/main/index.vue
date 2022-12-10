@@ -7,6 +7,34 @@
     <div class="max-w-screen-xl mx-auto m1 xl:mt-4">
       <list-vue></list-vue>
     </div>
+
+    <!--移动端: 下面导航栏-->
+    <m-trigger-menu class="fixed bottom-2 left-[50%] translate-x-[-50%]">
+      <m-trigger-menu-item 
+        icon="home"  
+        iconClass="fill-zinc-900 dark:fill-zinc-200"
+        to="/"
+      >
+        首页
+      </m-trigger-menu-item>
+      <m-trigger-menu-item
+        v-if="$store.getters.token"
+        icon="vip"
+        iconClass="fill-zinc-400 dark:fill-zinc-500"
+        textClass="text-zinc-400 dark:text-zinc-500"
+        to="/"
+      >
+      VIP
+    </m-trigger-menu-item>
+    <m-trigger-menu-item
+        icon="profile"
+        iconClass="fill-zinc-400 dark:fill-zinc-500"
+        textClass="text-zinc-400 dark:text-zinc-500"
+        to="/profile"
+    >
+    {{$store.getters.token ? '我的' : '未登录'}}
+    </m-trigger-menu-item>
+      </m-trigger-menu>
   </div>
 </template>
 <script setup>

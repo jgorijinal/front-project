@@ -11,7 +11,8 @@ module.exports = {
         xl: ['0.65rem', '0.75rem']
       },
       boxShadow: {
-        'l-white': '-10px 0 10px white'
+        'l-white': '-10px 0 10px white',
+        'l-black': '-10px 0 10px #27272a'
       },
       height: {
         'header': '72px',

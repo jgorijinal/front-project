@@ -1,18 +1,18 @@
 <template>
-  <div class="sticky left-0 top-0 right-0 z-20 bg-white" >
+  <div class="sticky left-0 top-0 right-0 z-20 bg-white dark:bg-zinc-800" >
     <ul ref="ulRef" class="relative flex overflow-x-auto overflow-hidden p-1 text-xs text-zinc-600">
       <!--slider 滑块-->
       <li  ref="sliderRef" class="absolute h-[22px] bg-zinc-700 rounded-lg duration-200" :style="sliderStyle" ></li>
       <!--汉堡-->
-      <li class="fixed z-20 top-0 right-[-1px] h-[42.9px] pr-1 flex items-center bg-white shadow-l-white"
+      <li class="fixed z-20 top-0 right-[-1px] h-[42.9px] pr-1 flex items-center bg-white dark:bg-zinc-800 shadow-l-white dark:shadow-l-black"
         @click="onClickHamburger"
       >
         <m-svg-icon name="hamburger" class="w-1.5 h-1.5"/>
       </li>
       <!--分类 item-->
       <li @click="onItemClick(item)" :ref="setItemRef" v-for="item,index in $store.getters.categorys" :key="item.id" 
-        class="shrink-0 px-1.5 py-0.5 duration-200 last:mr-4 z-10"
-        :class="{'text-zinc-200': $store.getters.currentCategoryIndex === index}"
+        class="shrink-0 px-1.5 py-0.5 duration-200 last:mr-4 z-10 dark:text-zinc-400"
+        :class="{'text-zinc-200 dark:text-zinc-100': $store.getters.currentCategoryIndex === index}"
         >
         {{item.name}}
       </li>
