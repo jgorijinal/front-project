@@ -26,9 +26,11 @@
 </template>
 <script setup>
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex';
 const router = useRouter()
-
+const store = useStore()
 const clickLogo = () => {
+  store.commit('app/setRouterType', 'none')
   router.push('/')
 }
 </script>

@@ -1,5 +1,7 @@
 <template>
-  <div class="h-full overflow-auto bg-white dark:bg-zinc-800 duration-500 
+  <div
+    ref="containerRef" 
+    class="h-full overflow-auto bg-white dark:bg-zinc-800 duration-500 
       scrollbar-thin scrollbar-thumb-transparent xl:scrollbar-thumb-zinc-200 xl:dark:scrollbar-thumb-zinc-900 scrollbar-track-transparent" >
     <!--导航栏 pc/移动端-->
     <navigation-vue></navigation-vue>
@@ -48,6 +50,8 @@ import listVue from './components/list/index.vue'
 import { isMobileTerminal } from '@/utils/flexible'
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+import { useScroll } from '@vueuse/core';
+import { onActivated,ref } from 'vue';
 const router = useRouter()
 const store = useStore()
 const onVipClick = () => {
@@ -55,10 +59,28 @@ const onVipClick = () => {
   router.push('/member')
 }
 const onProfileClick = () => {
-  store.commit('app/setRouterType', 'push')
-  router.push('/profile')
+  if (store.getters.token) {
+    store.commit('app/setRouterType', 'push')
+    router.push('/profile') 
+  } else {
+    store.commit('app/setRouterType', 'none')
+    router.push('/login') 
+  }
 }
 
+
+// 记录滚动位置
+const containerRef = ref(null)
+// 拿到滚动的距离
+const { y } = useScroll(containerRef)
+// 被激活时
+onActivated(() => {
+  if (!containerRef.value) {
+    return
+  }
+  // 赋值给 scrollTop
+  containerRef.value.scrollTop = y.value
+})
 </script>
 <style lang="scss" scoped>
   

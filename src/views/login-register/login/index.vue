@@ -93,11 +93,12 @@ const onCaptchaSuccess = async () => {
     await store.dispatch('user/loginAction', {
       ...loginForm.value,
       loginType: LOGIN_TYPE_USERNAME
-  }) 
+    })
+    store.commit('app/setRouterType', 'push')
+    router.push('/') 
   } finally {
     loading.value = false
   }
-  router.push('/')
 }
 //  sliderCaptcha 关闭
 const onCaptchaClose = () => {

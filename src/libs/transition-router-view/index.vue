@@ -83,12 +83,12 @@ const afterLeave = () => {
 // push页面时：新页面的进入动画
 .push-enter-active {
   animation-name: push-in;
-  animation-duration: 0.2s;
+  animation-duration: 0.4s;
 }
 // push页面时：老页面的退出动画
 .push-leave-active {
   animation-name: push-out;
-  animation-duration: 0.2s;
+  animation-duration: 0.4s;
 }
 // push页面时：新页面的进入动画
 @keyframes push-in {
@@ -112,12 +112,12 @@ const afterLeave = () => {
 // 后退页面时：即将展示的页面动画
 .back-enter-active {
   animation-name: back-in;
-  animation-duration: 0.2s;
+  animation-duration: 0.4s;
 }
 // 后退页面时：后退的页面执行的动画
 .back-leave-active {
   animation-name: back-out;
-  animation-duration: 0.2s;
+  animation-duration: 0.4s;
 }
 // 后退页面时：即将展示的页面动画
 @keyframes back-in {
