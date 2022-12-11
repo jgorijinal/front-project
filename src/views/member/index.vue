@@ -34,6 +34,12 @@
         <!-- 支付 -->
       </div>
     </div>
+    <!--倒计时-->
+    <m-count-down :time="(1000 * 60)">
+      <template v-slot="{ duration }">
+        {{duration}} !!!!!!!!
+      </template>
+    </m-count-down>
   </div>
 </template>
 
