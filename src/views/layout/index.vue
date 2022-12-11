@@ -8,6 +8,11 @@
     <floating-vue></floating-vue>
   </div>
 </template>
+<script>
+export default {
+  name:'home'
+}
+</script>
 <script setup>
 import headerVue from './components/header/index.vue'
 import mainVue from './components/main.vue'
