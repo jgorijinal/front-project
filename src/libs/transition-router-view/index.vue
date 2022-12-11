@@ -1,10 +1,12 @@
 <template>
   <router-view v-slot="{Component}">
     <!--过渡动画-->
-    <transition :name="transitionName" mode="out-in">
+    <transition :name="transitionName"    
+      @before-enter="beforeEnter"
+      @after-leave="afterLeave">
       <!--缓存-->
       <keep-alive>
-          <component :is="Component"></component>
+          <component :is="Component" :class="{ 'fixed top-0 left-0 w-screen z-50': isAnimation }"></component>
       </keep-alive>
     </transition>
   </router-view>
@@ -46,6 +48,15 @@ const router = useRouter()
 router.beforeEach((to,from) => {
   transitionName.value = props.routerType
 })
+
+
+const isAnimation = ref(false)
+const beforeEnter = () => {
+  isAnimation.value = true 
+}
+const afterLeave = () => {
+  isAnimation.value = false 
+}
 </script>
 <style lang="scss" scoped>
 // push页面时：新页面的进入动画

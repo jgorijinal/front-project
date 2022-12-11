@@ -22,7 +22,7 @@
         icon="vip"
         iconClass="fill-zinc-400 dark:fill-zinc-500"
         textClass="text-zinc-400 dark:text-zinc-500"
-        to="/"
+        @click="onVipClick"
       >
       VIP
     </m-trigger-menu-item>
@@ -30,7 +30,7 @@
         icon="profile"
         iconClass="fill-zinc-400 dark:fill-zinc-500"
         textClass="text-zinc-400 dark:text-zinc-500"
-        to="/profile"
+        @click="onProfileClick"
     >
     {{$store.getters.token ? '我的' : '未登录'}}
     </m-trigger-menu-item>
@@ -41,6 +41,19 @@
 import navigationVue from './components/navigation/index.vue'
 import listVue from './components/list/index.vue'
 import { isMobileTerminal } from '@/utils/flexible'
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+const router = useRouter()
+const store = useStore()
+const onVipClick = () => {
+  store.commit('app/setRouterType', 'push')
+  router.push('/member')
+}
+const onProfileClick = () => {
+  store.commit('app/setRouterType', 'push')
+  router.push('/profile')
+}
+
 </script>
 <style lang="scss" scoped>
   

@@ -214,9 +214,8 @@ watch(isDialogVisible, (val) => {
  * 移动端后退处理
  */
 const onNavbarLeftClick = () => {
-  store.commit('app/setRouterType','back')
+  store.commit('app/setRouterType', 'back')
   router.back()
-  console.log(23)
 }
 
 const loading = ref(false)
