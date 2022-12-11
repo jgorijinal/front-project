@@ -5,7 +5,7 @@
       @before-enter="beforeEnter"
       @after-leave="afterLeave">
       <!--缓存-->
-      <keep-alive>
+      <keep-alive :include="virtualTaskStack">
           <component :is="Component" :class="{ 'fixed top-0 left-0 w-screen z-50': isAnimation }"></component>
       </keep-alive>
     </transition>
@@ -37,16 +37,36 @@ const props = defineProps({
     }
   },
   // 首页的组件名称, 对应任务栈的第一个组件
-  // mainComponentName: {
-  //   type: String,
-  //   required:true
-  // }
+  mainComponentName: {
+    type: String,
+    required:true
+  }
 })
-
 const transitionName = ref('')
 const router = useRouter()
-router.beforeEach((to,from) => {
+// 虚拟任务战
+// keep-alive 的 include 可以是一个字符串数组, 这些字符串对应组件的 name 选项
+const virtualTaskStack = ref([props.mainComponentName])
+// 清空栈
+const clearTask = () =>{
+  virtualTaskStack.value = [props.mainComponentName]
+}
+router.beforeEach((to, from) => {
+  console.log(to.name)
   transitionName.value = props.routerType
+
+  if (props.routerType === ROUTER_TYPE_PUSH) {
+     // 入栈  
+    virtualTaskStack.value.push(to.name)
+  } else if(props.routerType === ROUTER_TYPE_BACK){
+    // 出栈
+    virtualTaskStack.value.pop()
+  }
+  // 进入首页就清空栈
+  if (to.name === props.mainComponentName) {
+    clearTask()
+  }
+  console.log(virtualTaskStack.value)
 })
 
 
@@ -57,6 +77,7 @@ const beforeEnter = () => {
 const afterLeave = () => {
   isAnimation.value = false 
 }
+
 </script>
 <style lang="scss" scoped>
 // push页面时：新页面的进入动画
