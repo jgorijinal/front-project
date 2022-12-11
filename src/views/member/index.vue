@@ -32,10 +32,9 @@
         </div>
         <p class="mt-1 text-sm text-zinc-500">{{ currentPayData.desc }}</p>
         <!-- 支付 -->
+        <payment-vue class="mt-4" />
       </div>
     </div>
-    <!-- 支付 -->
-    <payment-vue class="mt-4" />
   </div>
 </template>
 
