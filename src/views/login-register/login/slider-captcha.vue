@@ -72,6 +72,6 @@ const onReset = () => {
  * 关闭
  */
 const onClose = () => {
-  emits([EMITS_SUCCESS])
+  emits(EMITS_CLOSE)
 }
 </script>

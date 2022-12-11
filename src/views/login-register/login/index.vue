@@ -36,12 +36,12 @@
         />
         <vee-error-message name="password"  class="text-sm text-red-600 block mt-0.5 text-left"></vee-error-message>
         <div class="pt-1 pb-3 leading-[0px] text-right">
-          <router-link
+          <a
             class="inline-block p-1 text-zinc-400 text-right dark:text-zinc-600 hover:text-zinc-600 dark:hover:text-zinc-400 text-sm duration-400 cursor-pointer"
-            to="/register"
+            @click.stop="clickRegister"
           >
             去注册
-          </router-link>
+          </a>
         </div>
         <m-button type="main" class="w-full dark:bg-zinc-900 xl:dark:bg-zinc-800" :loading="loading" :isActiveAnim="true">
           登录
@@ -102,6 +102,12 @@ const onCaptchaSuccess = async () => {
 //  sliderCaptcha 关闭
 const onCaptchaClose = () => {
   isCaptchaVisible.value = false
+}
+
+// 去注册
+const clickRegister = () => {
+  store.commit('app/setRouterType', 'push')
+  router.push('/register')
 }
 </script>
 <style lang="scss" scoped>

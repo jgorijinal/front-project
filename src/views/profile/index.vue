@@ -214,6 +214,7 @@ watch(isDialogVisible, (val) => {
  * 移动端后退处理
  */
 const onNavbarLeftClick = () => {
+  store.commit('app/setRouterType','back')
   router.back()
   console.log(23)
 }
@@ -235,7 +236,8 @@ const onChangeProfile = async () => {
 const onLogoutClick = () => {
   confirm('确定要退出登录吗？').then(() => {
     store.dispatch('user/logoutAction')
+    store.commit('app/setRouterType', 'push')
+    router.push('/login')
   })
-  router.push('/')
 }
 </script>

@@ -7,7 +7,9 @@ export default {
       // navigation 的当前选中项
       currentCategory: ALL_CATEGORY_ITEM,
       // 搜索文本
-      searchText: ''
+      searchText: '',
+      // 路由当前类型 none, push, back
+      routerType:'none'
     }
   },
   mutations: {
@@ -17,6 +19,10 @@ export default {
     // 修改搜索文本
     setSearchText(state, newSearchText){
       state.searchText = newSearchText
+    },
+    // 修改路由进入类型
+    setRouterType(state, newRouterType) {
+      state.routerType = newRouterType
     }
   }
 }

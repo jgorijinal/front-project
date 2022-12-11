@@ -1,3 +1,4 @@
+import {isMobileTerminal } from '@/utils/flexible'
 export default {
   // navigation 的全部的分类
   categorys: state => state.category.categorys,
@@ -18,5 +19,13 @@ export default {
   // token
   token: state => state.user.token,
   // 用户信息
-  userInfo : state => state.user.userInfo
+  userInfo: state => state.user.userInfo,
+  // 当前路由类型 none, push, back
+  routerType: state => {
+    if (!isMobileTerminal.value) {
+      return 'none'
+    } else {
+      return state.app.routerType
+    }
+  }
 }

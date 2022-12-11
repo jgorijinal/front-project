@@ -28,12 +28,12 @@ const props = defineProps({
     type:String
   }
 })
-
 const router = useRouter()
 const clickItem = () => {
+  if (!props.to) {
+    return
+  }
+  // 跳转
   router.push(props.to)
 }
 </script>
-<style lang="scss" scoped>
-  
-</style>

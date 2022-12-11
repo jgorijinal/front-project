@@ -9,7 +9,7 @@ router.beforeEach((to,from) => {
   } else {
     // 没有登录
     if (to.meta.user) { // 需要登录的页面
-      message('warn', '此页面访问失败, 请先登录后再试')
+      message('warn', '请先登录后再试')
       return '/login'
     } else {
       return true
