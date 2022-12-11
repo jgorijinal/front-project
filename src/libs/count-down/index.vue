@@ -27,7 +27,7 @@ const props = defineProps({
     default:'HH:mm:ss'
   }
 })
-const emits = defineEmits([EMITS_CHANGE,EMITS_END])
+const emits = defineEmits([EMITS_CHANGE,EMITS_FINISH])
 
 let intervalId = null 
 // 清除计时器

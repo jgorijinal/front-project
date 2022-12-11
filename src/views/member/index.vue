@@ -34,12 +34,8 @@
         <!-- 支付 -->
       </div>
     </div>
-    <!--倒计时-->
-    <m-count-down :time="(1000 * 60)">
-      <template v-slot="{ duration }">
-        {{duration}} !!!!!!!!
-      </template>
-    </m-count-down>
+    <!-- 支付 -->
+    <payment-vue class="mt-4" />
   </div>
 </template>
 
@@ -56,7 +52,7 @@ import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import { getVipPayList } from '@/api/pay'
-
+import paymentVue from './components/payment/index.vue'
 /**
  * 列表数据
  */
