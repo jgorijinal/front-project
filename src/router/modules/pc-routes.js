@@ -17,6 +17,15 @@ export default [
           user: true
         }
       },
+      {
+        path: 'member',
+        name: 'member',
+        component: () => import('@/views/member/index.vue'),
+        meta: {
+          user: true // 需要登录才可以访问
+        }
+      }
+    
     ]
   },
   {
@@ -34,4 +43,5 @@ export default [
     name: 'register',
     component: () => import('@/views/login-register/register/index.vue')
   },
+  
 ]
