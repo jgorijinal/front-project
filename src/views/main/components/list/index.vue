@@ -1,5 +1,6 @@
 <template>
-  <div id="containerId">
+  <div>
+    <div id="containerId">
     <m-infinite-list v-model="isLoading" :isFinished="isFinished" @onLoad="getPexelsData">
       <m-waterfull :data="pexelsData" :column="isMobileTerminal ? 2 : 5" nodeKey="id" class="w-full px-1" :picturePreReading="false">
         <template v-slot="{item, width}">
@@ -12,6 +13,7 @@
   <transition :css="false" @before-enter="beforeEnter" @enter="enter" @leave="leave">
     <pins-vue v-if="isPinsVisible" :id="currentPins.id"></pins-vue>
   </transition>
+  </div>
 </template>
 <script setup>
 import itemVue from './item.vue';

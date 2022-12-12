@@ -51,7 +51,7 @@
     </div>
     <!--作者信息-->
     <div class="flex items-center mt-1 px-1">
-      <img class="h-2 w-2 rounded-full" :src="item.avatar" alt="" />
+      <img v-imageError="'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'" class="h-2 w-2 rounded-full" :src="item.avatar" alt="" />
       <span class="text-sm text-zinc-500 ml-1">{{ item.author }}</span>
     </div>
   </div>

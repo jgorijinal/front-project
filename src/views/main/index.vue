@@ -7,7 +7,7 @@
     <navigation-vue></navigation-vue>
     <!--图片列表-->
     <div class="max-w-screen-xl mx-auto m1 xl:mt-4">
-      <list-vue></list-vue>
+        <list-vue></list-vue>
     </div>
 
     <!--移动端: 下面导航栏-->
