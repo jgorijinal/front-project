@@ -6,8 +6,15 @@
         <div  class="guide-my relative flex items-center p-0.5 rounded-sm cursor-pointer duration-200
           outline-none hover:bg-zinc-100 dark:hover:bg-zinc-600">
           <img
+          v-if="$store.getters.token"
           class="w-4 h-4 rounded-sm"
-          src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic_source%2F0c%2Fef%2Fa0%2F0cefa0f17b83255217eddc20b15395f9.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1651074011&t=ba5d64079381425813e4c269bcac1a1b"
+          v-imageError="'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'"
+          :src="$store.getters.userInfo.avatar"
+        />
+        <img
+          v-if="!$store.getters.token"
+          class="w-4 h-4 rounded-sm"
+          src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
         />
          <!-- 下箭头 -->
          <m-svg-icon

@@ -1,7 +1,7 @@
 export default {
   mounted(el, binding) {
     el.onerror = () => {
-      console.log('出错了')
+      console.log('图片出错了')
       el.src = binding.value
     }
   }
