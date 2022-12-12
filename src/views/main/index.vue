@@ -46,16 +46,18 @@
     </m-trigger-menu-item>
   </m-trigger-menu>
   <!--主题替换-->
-  <m-popup v-model="isPopupVisible" class="h-[50%]">
+  <m-popup v-model="isPopupVisible" class="h-[30%] dark:bg-zinc-700">
     <div>
-      <h1 class="text-base p-1 font-bold">更换主题</h1>
-      <div class="p-1">
+      <h1 class="text-base p-1 font-bold  dark:text-zinc-300">更换主题</h1>
+      <div class="flex items-center p-1">
+        <span class="text-sm pr-1 dark:text-zinc-300">极简白</span>
         <m-switch v-model="switchValue" 
-          active-value="dark" 
+          active-value="dark"
           inactive-value="light"
-          active-color="#3f3f46"
+          active-color="#ababb0"
+          @change="changeTheme"
           ></m-switch>
-        {{switchValue}}
+        <span class="text-sm pl-1 dark:text-zinc-300">深夜黑</span>
       </div>
     </div>
   </m-popup>
@@ -73,7 +75,8 @@ import { isMobileTerminal } from '@/utils/flexible'
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { useScroll } from '@vueuse/core';
-import { onActivated,ref } from 'vue';
+import { onActivated, ref } from 'vue';
+import { THEME_LIGHT,THEME_DARK } from '@/constants'
 const router = useRouter()
 const store = useStore()
 const onVipClick = () => {
@@ -114,6 +117,14 @@ const changePopupVisible = () => {
 
 // switch 值 : light / dark
 const switchValue = ref('light')
+
+const changeTheme = (val) => {
+  if (val === 'light') {
+    store.commit('theme/setThemeType', THEME_LIGHT)
+  } else if (val === 'dark') {
+    store.commit('theme/setThemeType', THEME_DARK) 
+  }
+}
 </script>
 <style lang="scss" scoped>
   
