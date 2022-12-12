@@ -1,4 +1,4 @@
-export const PC_DEVICE_WIDTH = 1280 
+export const PC_DEVICE_WIDTH = 760 
 
 // '全部'类型分类
 export const ALL_CATEGORY_ITEM = {

@@ -36,7 +36,29 @@
     >
     {{$store.getters.token ? '我的' : '未登录'}}
     </m-trigger-menu-item>
+    <m-trigger-menu-item
+        icon="fold"
+        iconClass="fill-zinc-400 dark:fill-zinc-500"
+        textClass="text-zinc-400 dark:text-zinc-500"
+        @click="changePopupVisible"
+    >
+      主题
+    </m-trigger-menu-item>
   </m-trigger-menu>
+  <!--主题替换-->
+  <m-popup v-model="isPopupVisible" class="h-[50%]">
+    <div>
+      <h1 class="text-base p-1 font-bold">更换主题</h1>
+      <div class="p-1">
+        <m-switch v-model="switchValue" 
+          active-value="dark" 
+          inactive-value="light"
+          active-color="#3f3f46"
+          ></m-switch>
+        {{switchValue}}
+      </div>
+    </div>
+  </m-popup>
   </div>
 </template>
 <script>
@@ -81,6 +103,17 @@ onActivated(() => {
   // 赋值给 scrollTop
   containerRef.value.scrollTop = y.value
 })
+
+
+// popup 显示/隐藏
+const isPopupVisible = ref(false)
+const changePopupVisible = () => {
+  isPopupVisible.value = !isPopupVisible.value 
+}
+
+
+// switch 值 : light / dark
+const switchValue = ref('light')
 </script>
 <style lang="scss" scoped>
   
