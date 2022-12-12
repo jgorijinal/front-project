@@ -4,8 +4,10 @@
       class="max-w-screen-lg mx-auto bg-white dark:bg-zinc-900 duration-400 xl:rounded-sm xl:border-zinc-200 xl:dark:border-zinc-600 xl:border-[1px] xl:px-4"
     >
       <!-- 移动端 navbar 处理 -->
-      <m-navbar v-if="isMobileTerminal" sticky :clickLeft="onNavbarLeftClick">
-        精选会员
+      <m-navbar v-if="isMobileTerminal" sticky @clickLeft="onNavbarLeftClick">
+        <template #center>
+          精选会员
+        </template>
       </m-navbar>
 
       <div class="py-2 px-1">
@@ -68,6 +70,7 @@ const store = useStore()
 const router = useRouter()
 const onNavbarLeftClick = () => {
   // 配置跳转方式
+  console.log(1)
   store.commit('app/changeRouterType', 'back')
   router.back()
 }

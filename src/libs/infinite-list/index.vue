@@ -7,6 +7,7 @@
       <m-svg-icon
         v-if="!isFinished"
         name="infinite-load"
+        fillClass="fill-zinc-900 dark:fill-zinc-200"
         class="mx-auto w-4 h-4 animate-spin mb-1"/>
       <!--没有更多数据了-->
       <p v-if="isFinished" class="text-center text-base text-zinc-400 pb-1">数据已经全部加载完成</p>

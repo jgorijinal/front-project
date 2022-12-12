@@ -23,7 +23,7 @@ import historyVue from './history.vue'
 import themeVue from './theme.vue'
 import { useStore } from 'vuex'
 // 输入框的内容
-const inputValue = ref('123')
+const inputValue = ref('')
 
 const store = useStore()
 // 点击了搜索按钮
