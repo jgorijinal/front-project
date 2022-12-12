@@ -6,8 +6,10 @@
       class="relative max-w-screen-lg mx-auto bg-white dark:bg-zinc-900 duration-400 xl:rounded-sm xl:border-zinc-200 xl:dark:border-zinc-600 xl:border-[1px] xl:px-4 xl:py-2"
     >
       <!-- 移动端 navbar -->
-      <m-navbar sticky v-if="isMobileTerminal" @clickLeft="onNavbarLeftClick">
-        个人资料
+      <m-navbar sticky  v-if="isMobileTerminal" @clickLeft="onNavbarLeftClick">
+        <template #center>
+          个人信息
+        </template>
       </m-navbar>
       <!-- pc 端 -->
       <div v-else class="text-lg font-bold text-center mb-4 dark:text-zinc-300">
@@ -32,7 +34,7 @@
               @click="onAvatarClick"
             />
             <div
-              class="absolute top-0 rounded-[50%] w-full h-full bg-[rgba(0,0,0,.4)] hidden xl:group-hover:block"
+              class="absolute odd: top-0 rounded-[50%] w-full h-full bg-[rgba(0,0,0,.4)] hidden xl:group-hover:block"
               @click="onAvatarClick"
             >
               <m-svg-icon

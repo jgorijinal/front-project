@@ -1,7 +1,8 @@
 <template>
   <div 
-    class="flex items-center h-5 w-full bg-white dark:bg-zinc-800 border-b border-b-zinc-200 dark:border-b-zinc-700"
-    :class="[sticky ? 'sticky left-0 top-0' : 'relative']"
+    class="flex items-center h-5 w-full bg-white dark:bg-zinc-800 border-b
+      border-b-zinc-200 dark:border-b-zinc-700"
+    :class="[sticky ? 'sticky z-[120] left-0 top-0 ' : 'relative']"
     >
     <!--左-->
     <div class="absolute left-0 top-0 h-full w-5 flex items-center justify-center text-base"
